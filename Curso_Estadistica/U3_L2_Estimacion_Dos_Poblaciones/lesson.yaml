@@ -1,0 +1,126 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U3_L2_Estimacion_Dos_Poblaciones
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la Leccion 2: Estimacion para dos poblaciones. Aqui aprenderas a estimar la diferencia entre dos medias, la diferencia entre dos proporciones, y a construir un intervalo de confianza relacionado con la varianza de dos grupos independientes."
+
+- Class: text
+  Output: "Objetivo de aprendizaje: al terminar esta leccion podras construir e interpretar intervalos de confianza para la diferencia de medias, la diferencia de proporciones y la razon de varianzas entre dos poblaciones independientes, usando R."
+
+- Class: text
+  Output: "Escenario: dos grupos de estudiantes presentaron el mismo examen. El Grupo A estudio con el metodo tradicional y el Grupo B con apoyo de lecciones interactivas. Queremos ESTIMAR que tan distintos son ambos grupos, sin usar pruebas de hipotesis, solo intervalos de confianza."
+
+- Class: mult_question
+  Output: "Cuando comparamos dos poblaciones independientes (como el Grupo A y el Grupo B), que cambia respecto a la estimacion de una sola poblacion que viste en la Leccion 1?"
+  AnswerChoices: Ya no se necesitan muestras, se usa toda la poblacion;En vez de estimar un solo parametro, se estima la diferencia (o razon) entre dos parametros, uno de cada grupo;Los intervalos de confianza dejan de tener sentido;Solo se puede comparar la media, nunca la proporcion ni la varianza
+  CorrectAnswer: En vez de estimar un solo parametro, se estima la diferencia (o razon) entre dos parametros, uno de cada grupo
+  AnswerTests: omnitest(correctVal='En vez de estimar un solo parametro, se estima la diferencia (o razon) entre dos parametros, uno de cada grupo')
+  Hint: "Piensa en que estamos comparando dos grupos distintos, no describiendo uno solo."
+
+- Class: text
+  Output: "Empecemos con la DIFERENCIA DE MEDIAS. Ya tienes cargados muestra_grupoA (35 estudiantes) y muestra_grupoB (32 estudiantes). Nota: t.test() con dos muestras usa por defecto el metodo de Welch, que no supone que ambos grupos tengan la misma varianza."
+
+- Class: cmd_question
+  Output: "Calcula la media del Grupo A con mean(muestra_grupoA) y guardala en media_grupoA."
+  CorrectAnswer: media_grupoA <- mean(muestra_grupoA)
+  AnswerTests: omnitest(correctExpr='media_grupoA <- mean(muestra_grupoA)')
+  Hint: "Usa mean() sobre muestra_grupoA y asigna el resultado con <-."
+
+- Class: cmd_question
+  Output: "Ahora calcula la media del Grupo B con mean(muestra_grupoB) y guardala en media_grupoB."
+  CorrectAnswer: media_grupoB <- mean(muestra_grupoB)
+  AnswerTests: omnitest(correctExpr='media_grupoB <- mean(muestra_grupoB)')
+  Hint: "Mismo procedimiento que el paso anterior, pero con muestra_grupoB."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 95% para la diferencia de medias (Grupo B menos Grupo A) usando t.test(muestra_grupoB, muestra_grupoA)$conf.int y guardalo en ic_dif_medias."
+  CorrectAnswer: ic_dif_medias <- t.test(muestra_grupoB, muestra_grupoA)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_dif_medias <- t.test(muestra_grupoB, muestra_grupoA)$conf.int')
+  Hint: "t.test() acepta dos vectores cuando quieres comparar dos grupos; el orden que pongas primero define el signo de la diferencia."
+
+- Class: exact_question
+  Output: "Escribe ic_dif_medias en la consola. Redondeado a UN decimal, cual es el limite INFERIOR de ese intervalo?"
+  CorrectAnswer: 2.0
+  AnswerTests: val_en_rango(1.95, 2.05)
+  Hint: "El limite inferior es el primer valor del vector: ic_dif_medias[1]."
+
+- Class: mult_question
+  Output: "El intervalo de confianza del 95% para la diferencia de medias (B - A) es aproximadamente [2.0, 10.0], y NO contiene el valor cero. Que significa esto en terminos de estimacion (sin hablar de hipotesis)?"
+  AnswerChoices: Que el Grupo A siempre obtiene mejores calificaciones que el Grupo B;Que, con 95% de confianza, el Grupo B tiene en promedio entre 2 y 10 puntos mas que el Grupo A en la poblacion;Que ambos grupos tienen exactamente la misma calificacion promedio;Que el intervalo esta mal calculado porque deberia incluir el cero
+  CorrectAnswer: Que, con 95% de confianza, el Grupo B tiene en promedio entre 2 y 10 puntos mas que el Grupo A en la poblacion
+  AnswerTests: omnitest(correctVal='Que, con 95% de confianza, el Grupo B tiene en promedio entre 2 y 10 puntos mas que el Grupo A en la poblacion')
+  Hint: "Lee los dos limites del intervalo: ambos son positivos, asi que describen cuantos puntos mas (en promedio) obtendria el Grupo B. Recuerda que hablamos de la poblacion, no de un estudiante en particular."
+
+- Class: text
+  Output: "Ahora estimaremos la DIFERENCIA DE PROPORCIONES de aprobados entre ambos grupos. Ya tienes cargados aprobo_grupoA y aprobo_grupoB (vectores logicos: TRUE si el estudiante aprobo, es decir calificacion >= 70)."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 95% para la diferencia de proporciones de aprobados (Grupo B menos Grupo A) usando prop.test(c(sum(aprobo_grupoB), sum(aprobo_grupoA)), c(length(aprobo_grupoB), length(aprobo_grupoA)))$conf.int y guardalo en ic_dif_prop."
+  CorrectAnswer: ic_dif_prop <- prop.test(c(sum(aprobo_grupoB), sum(aprobo_grupoA)), c(length(aprobo_grupoB), length(aprobo_grupoA)))$conf.int
+  AnswerTests: omnitest(correctExpr='ic_dif_prop <- prop.test(c(sum(aprobo_grupoB), sum(aprobo_grupoA)), c(length(aprobo_grupoB), length(aprobo_grupoA)))$conf.int')
+  Hint: "prop.test() para dos grupos necesita dos vectores: uno con el numero de exitos (sum de cada grupo) y otro con el tamano de cada muestra (length de cada grupo)."
+
+- Class: exact_question
+  Output: "Calcula mean(aprobo_grupoB), la proporcion de aprobados en el Grupo B. Redondea tu respuesta a dos decimales."
+  CorrectAnswer: 0.94
+  AnswerTests: val_en_rango(0.93, 0.95)
+  Hint: "mean() sobre un vector logico da directamente la proporcion de valores TRUE."
+
+- Class: mult_question
+  Output: "El intervalo de confianza del 95% para la diferencia de proporciones de aprobados (B - A) es aproximadamente [0.02, 0.42], sin contener el cero. Cual es la interpretacion correcta?"
+  AnswerChoices: Con 95% de confianza, la proporcion de aprobados es entre 2 y 42 puntos porcentuales mayor en el Grupo B que en el Grupo A, a nivel poblacional;Exactamente el 2% de los estudiantes aprobaron;El 42% de los estudiantes del Grupo A aprobaron;No se puede interpretar porque el intervalo es muy ancho
+  CorrectAnswer: Con 95% de confianza, la proporcion de aprobados es entre 2 y 42 puntos porcentuales mayor en el Grupo B que en el Grupo A, a nivel poblacional
+  AnswerTests: omnitest(correctVal='Con 95% de confianza, la proporcion de aprobados es entre 2 y 42 puntos porcentuales mayor en el Grupo B que en el Grupo A, a nivel poblacional')
+  Hint: "El intervalo describe la diferencia entre las proporciones POBLACIONALES de ambos grupos, expresada como proporcion (puedes multiplicar por 100 para verla en puntos porcentuales)."
+
+- Class: text
+  Output: "Por ultimo, la ESTIMACION RELACIONADA CON LA VARIANZA. Cuando comparamos dos grupos, tambien es util saber si la dispersion (variabilidad) de las calificaciones es distinta entre ellos. Para esto se construye un intervalo de confianza para la RAZON de varianzas. Este intervalo supone que ambas poblaciones son aproximadamente normales, y es mas sensible a ese supuesto que los intervalos para medias."
+
+- Class: cmd_question
+  Output: "Calcula la varianza del Grupo A con var(muestra_grupoA) y guardala en varianza_grupoA."
+  CorrectAnswer: varianza_grupoA <- var(muestra_grupoA)
+  AnswerTests: omnitest(correctExpr='varianza_grupoA <- var(muestra_grupoA)')
+  Hint: "Usa la funcion var() sobre muestra_grupoA."
+
+- Class: cmd_question
+  Output: "Ahora calcula la varianza del Grupo B: varianza_grupoB <- var(muestra_grupoB)."
+  CorrectAnswer: varianza_grupoB <- var(muestra_grupoB)
+  AnswerTests: omnitest(correctExpr='varianza_grupoB <- var(muestra_grupoB)')
+  Hint: "Mismo procedimiento que el paso anterior, con muestra_grupoB."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 95% para la razon de varianzas (Grupo B entre Grupo A) usando var.test(muestra_grupoB, muestra_grupoA)$conf.int y guardalo en ic_razon_var."
+  CorrectAnswer: ic_razon_var <- var.test(muestra_grupoB, muestra_grupoA)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_razon_var <- var.test(muestra_grupoB, muestra_grupoA)$conf.int')
+  Hint: "var.test() compara la varianza de dos muestras y da un intervalo de confianza para su razon (cociente) en $conf.int."
+
+- Class: mult_question
+  Output: "El intervalo de confianza del 95% para la razon de varianzas (B/A) es aproximadamente [0.24, 0.98], y NO contiene el valor 1. Que significa esto en terminos de estimacion?"
+  AnswerChoices: Que las dos varianzas son identicas porque el intervalo es angosto;Que, con 95% de confianza, la varianza del Grupo B es menor que la del Grupo A (el cociente es menor a 1 en todo el intervalo), es decir el Grupo B es mas homogeneo;Que la varianza no se puede estimar con estos datos;Que el metodo de estudio del Grupo A es mejor porque tiene mayor varianza
+  CorrectAnswer: Que, con 95% de confianza, la varianza del Grupo B es menor que la del Grupo A (el cociente es menor a 1 en todo el intervalo), es decir el Grupo B es mas homogeneo
+  AnswerTests: omnitest(correctVal='Que, con 95% de confianza, la varianza del Grupo B es menor que la del Grupo A (el cociente es menor a 1 en todo el intervalo), es decir el Grupo B es mas homogeneo')
+  Hint: "Una razon B/A menor a 1 significa que el numerador (Grupo B) varia menos que el denominador (Grupo A). Mira si todos los valores del intervalo estan por debajo de 1."
+
+- Class: text
+  Output: "Actividad integradora: vas a resumir en un solo lugar los tres resultados que obtuviste, calculando el margen de error de la diferencia de medias, tal como hiciste en la Leccion 1."
+
+- Class: cmd_question
+  Output: "Calcula el margen de error del intervalo de diferencia de medias: margen_error_medias <- (ic_dif_medias[2] - ic_dif_medias[1]) / 2."
+  CorrectAnswer: margen_error_medias <- (ic_dif_medias[2] - ic_dif_medias[1]) / 2
+  AnswerTests: omnitest(correctExpr='margen_error_medias <- (ic_dif_medias[2] - ic_dif_medias[1]) / 2')
+  Hint: "Es la misma formula que usaste en la Leccion 1: (limite superior - limite inferior) / 2, aplicada ahora a ic_dif_medias."
+
+- Class: mult_question
+  Output: "Considerando los tres intervalos que construiste en esta leccion (diferencia de medias, diferencia de proporciones y razon de varianzas), cual afirmacion describe correctamente lo que representa cada uno?"
+  AnswerChoices: Un rango de valores plausibles para un parametro poblacional (una diferencia o una razon), con un nivel de confianza dado;La diferencia exacta que se observara en cualquier nueva muestra;La proporcion de estudiantes de cada grupo que cae dentro del intervalo;Una regla que decide si los grupos son iguales o distintos
+  CorrectAnswer: Un rango de valores plausibles para un parametro poblacional (una diferencia o una razon), con un nivel de confianza dado
+  AnswerTests: omnitest(correctVal='Un rango de valores plausibles para un parametro poblacional (una diferencia o una razon), con un nivel de confianza dado')
+  Hint: "Los tres intervalos estiman parametros de la poblacion. No describen a estudiantes individuales ni toman decisiones; cuantifican la incertidumbre de una estimacion."
+
+- Class: text
+  Output: "Resumen de la Leccion 2: estimaste la diferencia de medias y de proporciones entre dos grupos independientes, construiste un intervalo de confianza para la razon de varianzas, calculaste el margen de error correspondiente, e interpretaste cada intervalo como un rango de valores plausibles para un parametro poblacional. En la siguiente leccion trabajaras con el NIVEL DE CONFIANZA, la PRECISION y el TAMANO DE MUESTRA."

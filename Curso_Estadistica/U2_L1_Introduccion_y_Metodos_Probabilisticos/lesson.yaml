@@ -1,0 +1,96 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U2_L1_Introduccion_y_Metodos_Probabilisticos
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la primera leccion de la Unidad 2: Muestreo. Hoy veremos los conceptos basicos del muestreo y tres metodos probabilisticos: aleatorio simple, sistematico y estratificado."
+
+- Class: text
+  Output: "Objetivo: al terminar esta leccion distinguiras poblacion y muestra, y aplicaras en R tres metodos de muestreo probabilistico."
+
+- Class: text
+  Output: "Definicion: el muestreo es el proceso de seleccionar un subconjunto de individuos (muestra) de una poblacion con el fin de estimar caracteristicas de toda la poblacion (Walpole et al., 2016)."
+
+- Class: text
+  Output: "Muestreo aleatorio simple (MAS): cada elemento de la poblacion tiene la misma probabilidad de ser seleccionado y cada muestra posible del mismo tamano es igualmente probable (Devore, 2015). Es el metodo base con el que se comparan los demas."
+
+- Class: mult_question
+  Output: "Cual de las siguientes describe el muestreo aleatorio simple?"
+  AnswerChoices: Cada elemento tiene la misma probabilidad de ser seleccionado;Se eligen los elementos mas faciles de alcanzar;Se divide la poblacion en grupos y se eligen grupos completos;Se elige un elemento cada cierto numero de posiciones
+  CorrectAnswer: Cada elemento tiene la misma probabilidad de ser seleccionado
+  AnswerTests: omnitest(correctVal='Cada elemento tiene la misma probabilidad de ser seleccionado')
+  Hint: Piensa en la definicion que acabamos de ver. Que probabilidad tiene cada elemento?
+
+- Class: text
+  Output: "En el entorno ya tienes el vector poblacion (los numeros del 1 al 200) y N, su tamano. Cada numero representa a un individuo."
+
+- Class: cmd_question
+  Output: "Selecciona una muestra aleatoria simple de 10 elementos de poblacion usando sample()."
+  CorrectAnswer: sample(poblacion, 10)
+  AnswerTests: omnitest(correctExpr='sample(poblacion, 10)')
+  Hint: sample(x, size) elige size elementos de x al azar, sin repetirlos.
+
+- Class: mult_question
+  Output: "Si ejecutas de nuevo sample(poblacion, 10), obtendras casi seguro otra muestra distinta. Que significa esto?"
+  AnswerChoices: Que R se equivoco;Que cada muestra aleatoria es una de las muchas muestras posibles de la poblacion;Que la poblacion cambio;Que el metodo no sirve
+  CorrectAnswer: Que cada muestra aleatoria es una de las muchas muestras posibles de la poblacion
+  AnswerTests: omnitest(correctVal='Que cada muestra aleatoria es una de las muchas muestras posibles de la poblacion')
+  Hint: Este es el origen de la idea de distribucion muestral que veras en la leccion 3.
+
+- Class: text
+  Output: "Muestreo sistematico: se calcula el intervalo de seleccion k = N / n (N es el tamano de la poblacion y n el de la muestra), se elige al azar un punto de inicio entre 1 y k, y despues se toma un elemento cada k posiciones (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "Queremos una muestra sistematica de n = 10 elementos de la poblacion de N = 200. Calcula el intervalo de seleccion k y guardalo en la variable k."
+  CorrectAnswer: k <- N / 10
+  AnswerTests: val_en_rango(20, 20)
+  Hint: El intervalo es el tamano de la poblacion dividido entre el tamano de la muestra.
+
+- Class: cmd_question
+  Output: "Elige el punto de inicio aleatorio, un entero entre 1 y k, y guardalo en la variable inicio."
+  CorrectAnswer: inicio <- sample(1:k, 1)
+  AnswerTests: test_inicio()
+  Hint: Necesitas un solo numero al azar del conjunto 1:k.
+
+- Class: cmd_question
+  Output: "Ahora selecciona la muestra sistematica: los elementos de poblacion que van desde inicio hasta N de k en k. Guardala en muestra_sis."
+  CorrectAnswer: muestra_sis <- poblacion[seq(inicio, N, by = k)]
+  AnswerTests: test_muestra_sistematica()
+  Hint: seq(desde, hasta, by = paso) genera posiciones separadas por paso. Usalas para indexar poblacion con corchetes.
+
+- Class: mult_question
+  Output: "El muestreo sistematico puede dar resultados enganosos si la poblacion tiene un patron periodico, por ejemplo, un registro donde cada 20 filas hay un cierre de mes con valores atipicos. Por que?"
+  AnswerChoices: Porque la muestra podria coincidir siempre con la misma posicion del patron y quedar sesgada;Porque k deja de ser un numero entero;Porque ya no es posible elegir un punto de inicio;Porque la muestra seria demasiado grande
+  CorrectAnswer: Porque la muestra podria coincidir siempre con la misma posicion del patron y quedar sesgada
+  AnswerTests: omnitest(correctVal='Porque la muestra podria coincidir siempre con la misma posicion del patron y quedar sesgada')
+  Hint: Si k coincide con la longitud del patron, que posiciones del patron termina viendo la muestra?
+
+- Class: text
+  Output: "Muestreo estratificado: la poblacion se divide en estratos (grupos homogeneos segun una caracteristica) y se toma una muestra aleatoria simple dentro de CADA estrato. Asegura que todos los grupos esten representados y suele mejorar la precision cuando los estratos difieren entre si (Devore, 2015)."
+
+- Class: text
+  Output: "En el data frame estudiantes, cada fila es un estudiante con su semestre (1 a 5) y su promedio. Los semestres seran nuestros estratos."
+
+- Class: cmd_question
+  Output: "Selecciona una muestra estratificada por semestre con 5 estudiantes de cada estrato (25 en total) y guardala en muestra_estrat. Una forma es dividir el data frame con split(), tomar 5 filas de cada parte con lapply() y sample(), y unir con do.call(rbind, ...)."
+  CorrectAnswer: muestra_estrat <- do.call(rbind, lapply(split(estudiantes, estudiantes$semestre), function(x) x[sample(nrow(x), 5), ]))
+  AnswerTests: test_muestra_estratificada()
+  Hint: Piensa en tres pasos. Primero divide por semestre, luego toma 5 filas al azar de cada pedazo y finalmente une los pedazos otra vez.
+
+- Class: mult_question
+  Output: "Cuando es mas apropiado el muestreo estratificado que el aleatorio simple?"
+  AnswerChoices: Cuando la poblacion es completamente homogenea;Cuando hay subgrupos con diferencias importantes y queremos que todos queden representados;Cuando la poblacion es muy pequena;Siempre es mejor
+  CorrectAnswer: Cuando hay subgrupos con diferencias importantes y queremos que todos queden representados
+  AnswerTests: omnitest(correctVal='Cuando hay subgrupos con diferencias importantes y queremos que todos queden representados')
+  Hint: Piensa en la representatividad de cada grupo.
+
+- Class: text
+  Output: "Resumen: aleatorio simple (misma probabilidad para todos), sistematico (un elemento cada k posiciones desde un inicio aleatorio, cuidado con la periodicidad) y estratificado (MAS dentro de cada estrato). Los tres son probabilisticos, por lo que permiten hacer inferencia estadistica. En la siguiente leccion veras los metodos por conglomerados y por conveniencia."
+
+# REFERENCIAS (APA):
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

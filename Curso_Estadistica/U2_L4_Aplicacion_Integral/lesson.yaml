@@ -1,0 +1,102 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U2_L4_Aplicacion_Integral
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la leccion final de Muestreo. Aqui aplicaras todo lo aprendido en un problema de Ingenieria de Software: elegir un metodo de muestreo, obtener muestras en R y analizar la distribucion muestral."
+
+- Class: text
+  Output: "Contexto: una empresa quiere estimar el tiempo promedio de carga de su aplicacion movil. La poblacion son sus 5,000 usuarios registrados. Ya tienes cargado el data frame usuarios_app con tres columnas: id, dispositivo (Movil, Laptop o Tablet) y tiempo_carga (en segundos)."
+
+- Class: cmd_question
+  Output: "Paso 1. Conoce la poblacion. Calcula la proporcion de usuarios de cada dispositivo con prop.table() aplicada a una tabla de frecuencias de usuarios_app$dispositivo."
+  CorrectAnswer: prop.table(table(usuarios_app$dispositivo))
+  AnswerTests: omnitest(correctExpr='prop.table(table(usuarios_app$dispositivo))')
+  Hint: table() cuenta cuantos usuarios hay de cada dispositivo y prop.table() convierte esos conteos en proporciones.
+
+- Class: cmd_question
+  Output: "Paso 2. Calcula el tiempo de carga promedio de cada dispositivo con tapply(). Recuerda que tapply(valores, grupos, funcion) aplica una funcion a los valores de cada grupo."
+  CorrectAnswer: tapply(usuarios_app$tiempo_carga, usuarios_app$dispositivo, mean)
+  AnswerTests: omnitest(correctExpr='tapply(usuarios_app$tiempo_carga, usuarios_app$dispositivo, mean)')
+  Hint: Los valores son usuarios_app$tiempo_carga, los grupos son usuarios_app$dispositivo y la funcion es mean.
+
+- Class: mult_question
+  Output: "Con esos resultados, que metodo de muestreo es mas apropiado para estimar el tiempo promedio de carga?"
+  AnswerChoices: Por conveniencia, usando solo usuarios de Movil;Estratificado por dispositivo;Sistematico sin conocer el orden de la lista;Ninguno, no se puede tomar muestra
+  CorrectAnswer: Estratificado por dispositivo
+  AnswerTests: omnitest(correctVal='Estratificado por dispositivo')
+  Hint: El tiempo de carga cambia mucho de un dispositivo a otro. Que metodo garantiza que todos los dispositivos esten representados en la muestra?
+
+- Class: text
+  Output: "Usaremos muestreo estratificado con asignacion proporcional: de cada dispositivo tomaremos el 2% de sus usuarios. Asi la muestra tiene la misma composicion que la poblacion (aprox. 50% Movil, 30% Laptop, 20% Tablet) y la media muestral simple es una estimacion razonable de la media poblacional."
+
+- Class: cmd_question
+  Output: "Paso 3. Selecciona la muestra: de cada dispositivo toma al azar el 2% de sus usuarios. Una pista: dentro de split(), cada parte x tiene nrow(x) filas y debes tomar round(0.02 * nrow(x)) de ellas. Guarda el resultado en muestra."
+  CorrectAnswer: muestra <- do.call(rbind, lapply(split(usuarios_app, usuarios_app$dispositivo), function(x) x[sample(nrow(x), round(0.02 * nrow(x))), ]))
+  AnswerTests: test_estratificada_prop()
+  Hint: Es la misma estructura que usaste en la leccion 1 (split, lapply con sample, do.call con rbind), pero ahora el tamano por estrato es round(0.02 * nrow(x)).
+
+- Class: cmd_question
+  Output: "Paso 4. Calcula la media del tiempo de carga de tu muestra. Guardala en media_muestra."
+  CorrectAnswer: media_muestra <- mean(muestra$tiempo_carga)
+  AnswerTests: omnitest(correctExpr='media_muestra <- mean(muestra$tiempo_carga)')
+  Hint: Aplica mean() a la columna tiempo_carga del data frame muestra.
+
+- Class: cmd_question
+  Output: "Paso 5. Para comparar, calcula la media real de la poblacion (el parametro) y guardala en media_poblacional."
+  CorrectAnswer: media_poblacional <- mean(usuarios_app$tiempo_carga)
+  AnswerTests: omnitest(correctExpr='media_poblacional <- mean(usuarios_app$tiempo_carga)')
+  Hint: Ahora usa toda la columna tiempo_carga de usuarios_app, no solo la muestra.
+
+- Class: mult_question
+  Output: "media_muestra y media_poblacional son parecidas pero no identicas. Como se llama esa diferencia natural entre un estadistico y el parametro?"
+  AnswerChoices: Error de calculo;Error de muestreo;Sesgo de seleccion;Error estandar
+  CorrectAnswer: Error de muestreo
+  AnswerTests: omnitest(correctVal='Error de muestreo')
+  Hint: Es la diferencia que aparece solo porque observamos una muestra y no toda la poblacion. No confundir con el error estandar, que mide la variabilidad del estadistico.
+
+- Class: text
+  Output: "Una sola muestra da una sola media. Para ver cuanto varia esa media de muestra en muestra, repetiremos el procedimiento muchas veces y estudiaremos la distribucion muestral."
+
+- Class: cmd_question
+  Output: "Paso 6. Repite 100 veces el muestreo estratificado del Paso 3 y calcula en cada repeticion la media de tiempo_carga. Guarda las 100 medias en medias_muestreo. Usa replicate() y reutiliza tu codigo del Paso 3."
+  CorrectAnswer: medias_muestreo <- replicate(100, mean(do.call(rbind, lapply(split(usuarios_app, usuarios_app$dispositivo), function(x) x[sample(nrow(x), round(0.02 * nrow(x))), ]))$tiempo_carga))
+  AnswerTests: test_medias_replicadas(100)
+  Hint: replicate(100, expresion) donde la expresion es mean( muestra_estratificada$tiempo_carga ). Puedes construir la muestra dentro de la propia expresion.
+
+- Class: cmd_question
+  Output: "Paso 7. Dibuja el histograma de medias_muestreo."
+  CorrectAnswer: hist(medias_muestreo)
+  AnswerTests: omnitest(correctExpr='hist(medias_muestreo)')
+  Hint: Usa hist() sobre el vector de las 100 medias.
+
+- Class: cmd_question
+  Output: "Paso 8. Calcula la desviacion estandar de medias_muestreo. Esa cifra estima el error estandar de la media muestral con este diseno. Guardala en error_estandar."
+  CorrectAnswer: error_estandar <- sd(medias_muestreo)
+  AnswerTests: omnitest(correctExpr='error_estandar <- sd(medias_muestreo)')
+  Hint: El error estandar es la desviacion estandar de la distribucion muestral del estadistico.
+
+- Class: mult_question
+  Output: "Paso 9, interpretacion. Que dice error_estandar sobre tu plan de muestreo?"
+  AnswerChoices: Que tan lejos esta cada usuario de la media poblacional;Cuanto varia la media muestral de una muestra a otra con este diseno de muestreo;La proporcion de usuarios que usa Movil;El tamano de muestra necesario
+  CorrectAnswer: Cuanto varia la media muestral de una muestra a otra con este diseno de muestreo
+  AnswerTests: omnitest(correctVal='Cuanto varia la media muestral de una muestra a otra con este diseno de muestreo')
+  Hint: El error estandar describe la variabilidad de un estadistico (aqui la media muestral), no la de los usuarios individuales.
+
+- Class: mult_question
+  Output: "Cual es la principal ventaja de haber usado muestreo estratificado en este problema?"
+  AnswerChoices: Garantiza que cada dispositivo este representado y mejora la precision porque el tiempo de carga difiere entre dispositivos;Elimina por completo el error de muestreo;Permite usar una muestra por conveniencia;Evita tener que usar set.seed
+  CorrectAnswer: Garantiza que cada dispositivo este representado y mejora la precision porque el tiempo de carga difiere entre dispositivos
+  AnswerTests: omnitest(correctVal='Garantiza que cada dispositivo este representado y mejora la precision porque el tiempo de carga difiere entre dispositivos')
+  Hint: Piensa en lo que viste en el Paso 2 sobre los promedios de cada dispositivo. El muestreo no elimina el error, solo lo controla.
+
+- Class: text
+  Output: "Conclusion: elegiste un metodo de muestreo justificado con los datos, obtuviste una muestra con R, calculaste un estadistico, repetiste el proceso y analizaste su distribucion muestral. Con esto cierras la Unidad 2. En la Unidad 3 usaras estas ideas para construir intervalos de confianza."
+
+# REFERENCIAS (APA):
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

@@ -1,0 +1,127 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U3_L1_Estimacion_Puntual_e_Intervalos
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la Leccion 1: Estimacion puntual e intervalos para una poblacion. En esta leccion trabajaremos con una poblacion simulada de calificaciones de examen para aprender los fundamentos de la estimacion estadistica."
+
+- Class: text
+  Output: "Objetivo de aprendizaje: al terminar esta leccion podras distinguir entre poblacion, muestra, parametro y estimador; calcular estimaciones puntuales en R; y construir e interpretar intervalos de confianza para una media y una proporcion."
+
+- Class: text
+  Output: "Empecemos con los conceptos basicos. La POBLACION es el conjunto completo de elementos que queremos estudiar. La MUESTRA es un subconjunto de la poblacion que realmente observamos. El PARAMETRO es una caracteristica numerica de la poblacion, por ejemplo la media poblacional. El ESTIMADOR es una formula calculada a partir de la muestra que se usa para aproximar ese parametro."
+
+- Class: mult_question
+  Output: "Un profesor quiere conocer el promedio de calificacion de TODOS los estudiantes de su universidad (mas de 10,000), pero solo revisa las calificaciones de 40 estudiantes elegidos al azar. Que representan esos 40 estudiantes?"
+  AnswerChoices: La poblacion;Una muestra;Un parametro;Un estimador
+  CorrectAnswer: Una muestra
+  AnswerTests: omnitest(correctVal='Una muestra')
+  Hint: "Piensa en la diferencia entre el conjunto completo de estudiantes de la universidad y el subconjunto de 40 que realmente se observo."
+
+- Class: text
+  Output: "En el entorno ya tienes cargados dos objetos: poblacion_calificaciones (las 500 calificaciones de toda la poblacion) y muestra_calificaciones (una muestra aleatoria de 40 estudiantes tomada de esa poblacion)."
+
+- Class: cmd_question
+  Output: "Calcula la media de la poblacion completa con mean(poblacion_calificaciones) y guardala en la variable media_poblacional."
+  CorrectAnswer: media_poblacional <- mean(poblacion_calificaciones)
+  AnswerTests: omnitest(correctExpr='media_poblacional <- mean(poblacion_calificaciones)')
+  Hint: "Usa la funcion mean() sobre el vector poblacion_calificaciones y asigna el resultado con <-."
+
+- Class: cmd_question
+  Output: "Ahora calcula la media de la muestra con mean(muestra_calificaciones) y guardala en la variable media_muestral. Este numero es tu ESTIMACION PUNTUAL de la media poblacional."
+  CorrectAnswer: media_muestral <- mean(muestra_calificaciones)
+  AnswerTests: omnitest(correctExpr='media_muestral <- mean(muestra_calificaciones)')
+  Hint: "Es el mismo procedimiento que el paso anterior, mean() sobre muestra_calificaciones."
+
+- Class: mult_question
+  Output: "Notaste que media_muestral no es exactamente igual a media_poblacional, aunque son parecidas. Como se interpreta correctamente esta diferencia?"
+  AnswerChoices: Es un error de calculo en R;Es el error de muestreo, esperado porque la muestra es solo una parte de la poblacion;Significa que la muestra esta mal tomada;Significa que hay que cambiar la formula del estimador
+  CorrectAnswer: Es el error de muestreo, esperado porque la muestra es solo una parte de la poblacion
+  AnswerTests: omnitest(correctVal='Es el error de muestreo, esperado porque la muestra es solo una parte de la poblacion')
+  Hint: "Ninguna muestra representa perfectamente a la poblacion; esa diferencia natural tiene nombre propio."
+
+- Class: text
+  Output: "Un buen estimador debe cumplir ciertas caracteristicas: ser INSESGADO (en promedio no sobreestima ni subestima el parametro), ser EFICIENTE (tiene poca variabilidad entre distintas muestras) y ser CONSISTENTE (mejora conforme crece el tamano de muestra)."
+
+- Class: mult_question
+  Output: "Cual de las siguientes describe mejor la propiedad de INSESGADEZ de un estimador?"
+  AnswerChoices: Que siempre de exactamente el mismo valor sin importar la muestra;Que en promedio, a lo largo de muchas muestras, no sobreestime ni subestime el parametro poblacional;Que se calcule usando la mayor cantidad posible de decimales;Que dependa del criterio del investigador
+  CorrectAnswer: Que en promedio, a lo largo de muchas muestras, no sobreestime ni subestime el parametro poblacional
+  AnswerTests: omnitest(correctVal='Que en promedio, a lo largo de muchas muestras, no sobreestime ni subestime el parametro poblacional')
+  Hint: "Insesgado no significa que una sola muestra de el valor exacto, sino que no hay sesgo sistematico en promedio."
+
+- Class: text
+  Output: "La estimacion puntual da un solo numero, pero no dice que tan precisa es. Para eso se usan los INTERVALOS DE CONFIANZA: un rango de valores donde es razonable esperar que se encuentre el parametro poblacional, junto con un nivel de confianza asociado, por ejemplo 95%."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 95% para la media poblacional usando t.test(muestra_calificaciones)$conf.int y guardalo en la variable ic_media."
+  CorrectAnswer: ic_media <- t.test(muestra_calificaciones)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_media <- t.test(muestra_calificaciones)$conf.int')
+  Hint: "t.test() devuelve una lista de resultados; el intervalo de confianza esta guardado en el elemento $conf.int."
+
+- Class: exact_question
+  Output: "Escribe ic_media en la consola para verlo. Redondeado a UN decimal, cual es el limite INFERIOR del intervalo de confianza que calculaste?"
+  CorrectAnswer: 75.3
+  AnswerTests: val_en_rango(75.2, 75.4)
+  Hint: "El limite inferior es el primer valor del vector: ic_media[1]."
+
+- Class: mult_question
+  Output: "El intervalo de confianza del 95% que obtuviste es aproximadamente [75.3, 80.4]. Cual es la interpretacion CORRECTA de este resultado?"
+  AnswerChoices: Hay 95% de probabilidad de que un estudiante califique entre 75.3 y 80.4;Con un 95% de confianza, la media poblacional de calificaciones se encuentra entre 75.3 y 80.4;El 95% de los estudiantes de la muestra calificaron entre 75.3 y 80.4;La media muestral siempre sera 77.85
+  CorrectAnswer: Con un 95% de confianza, la media poblacional de calificaciones se encuentra entre 75.3 y 80.4
+  AnswerTests: omnitest(correctVal='Con un 95% de confianza, la media poblacional de calificaciones se encuentra entre 75.3 y 80.4')
+  Hint: "El intervalo de confianza es sobre el PARAMETRO poblacional (la media de toda la poblacion), no sobre calificaciones individuales."
+
+- Class: text
+  Output: "Ahora trabajaremos con una PROPORCION. En muestra_aprobo tienes un vector logico (TRUE/FALSE) que indica si cada estudiante de la muestra aprobo el examen (calificacion mayor o igual a 70)."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 95% para la proporcion de aprobados usando prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int y guardalo en la variable ic_proporcion."
+  CorrectAnswer: ic_proporcion <- prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int
+  AnswerTests: omnitest(correctExpr='ic_proporcion <- prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int')
+  Hint: "sum(muestra_aprobo) cuenta cuantos TRUE hay (aprobados); length(muestra_aprobo) es el tamano de la muestra."
+
+- Class: exact_question
+  Output: "Que proporcion (entre 0 y 1) de la MUESTRA aprobo el examen? Calcula mean(muestra_aprobo) y redondea a dos decimales."
+  CorrectAnswer: 0.82
+  AnswerTests: val_en_rango(0.81, 0.83)
+  Hint: "mean() de un vector logico calcula directamente la proporcion de valores TRUE."
+
+- Class: mult_question
+  Output: "El intervalo de confianza del 95% para la proporcion de aprobados es aproximadamente [0.666, 0.921]. Como se interpreta correctamente?"
+  AnswerChoices: El 92.1% de los estudiantes de la muestra aprobaron;Con un 95% de confianza, la proporcion real de aprobados en TODA la poblacion esta entre 66.6% y 92.1%;Hay un 95% de probabilidad de aprobar el examen;El intervalo es incorrecto porque es muy ancho
+  CorrectAnswer: Con un 95% de confianza, la proporcion real de aprobados en TODA la poblacion esta entre 66.6% y 92.1%
+  AnswerTests: omnitest(correctVal='Con un 95% de confianza, la proporcion real de aprobados en TODA la poblacion esta entre 66.6% y 92.1%')
+  Hint: "De nuevo, el intervalo describe al PARAMETRO poblacional (la proporcion real de aprobados en toda la universidad), no a la muestra."
+
+- Class: text
+  Output: "El MARGEN DE ERROR es la mitad del ancho del intervalo de confianza: indica que tanto puede variar la estimacion puntual hacia arriba o hacia abajo. Se calcula como (limite superior - limite inferior) / 2."
+
+- Class: cmd_question
+  Output: "Calcula el margen de error del intervalo de confianza para la media (usa el vector ic_media que ya calculaste) y guardalo en la variable margen_error."
+  CorrectAnswer: margen_error <- (ic_media[2] - ic_media[1]) / 2
+  AnswerTests: test_margen_error()
+  Hint: "Recuerda: margen de error = (limite superior - limite inferior) / 2."
+
+- Class: text
+  Output: "Actividad integradora: vas a repetir todo el procedimiento, pero ahora sobre un subconjunto distinto de la muestra, para ver como cambia la precision de la estimacion con menos datos."
+
+- Class: cmd_question
+  Output: "Toma los primeros 15 valores de muestra_calificaciones con muestra_calificaciones[1:15], calcula su intervalo de confianza del 95% con t.test(), y guarda el resultado en ic_media_chica."
+  CorrectAnswer: ic_media_chica <- t.test(muestra_calificaciones[1:15])$conf.int
+  AnswerTests: omnitest(correctExpr='ic_media_chica <- t.test(muestra_calificaciones[1:15])$conf.int')
+  Hint: "Es el mismo procedimiento que usaste para ic_media, pero aplicado al subconjunto muestra_calificaciones[1:15]."
+
+- Class: mult_question
+  Output: "Comparando ic_media (n = 40) con ic_media_chica (n = 15), que esperarias que ocurra con el ANCHO del intervalo al tener menos datos?"
+  AnswerChoices: El intervalo se hace mas angosto (mas preciso);El intervalo se hace mas ancho (menos preciso);El ancho no cambia porque la media es la misma;El intervalo desaparece
+  CorrectAnswer: El intervalo se hace mas ancho (menos preciso)
+  AnswerTests: omnitest(correctVal='El intervalo se hace mas ancho (menos preciso)')
+  Hint: "A menor tamano de muestra, hay menos informacion disponible, por lo que la incertidumbre (y el ancho del intervalo) aumenta."
+
+- Class: text
+  Output: "Resumen de la Leccion 1: distinguiste poblacion, muestra, parametro y estimador; calculaste estimaciones puntuales con mean(); construiste intervalos de confianza para una media (t.test) y una proporcion (prop.test); calculaste el margen de error; e interpretaste el significado de un intervalo de confianza y el efecto del tamano de muestra sobre su precision. En la siguiente leccion trabajaras con la comparacion entre DOS poblaciones."

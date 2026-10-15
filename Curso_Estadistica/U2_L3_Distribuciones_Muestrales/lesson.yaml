@@ -1,0 +1,116 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U2_L3_Distribuciones_Muestrales
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la leccion 3. Estudiaremos las distribuciones muestrales de la media, la proporcion y la varianza: como se comporta un estadistico cuando se repite el muestreo muchas veces."
+
+- Class: text
+  Output: "Objetivo: al terminar esta leccion distinguiras entre la distribucion de los datos, la de una muestra y la distribucion muestral de un estadistico, y la simularas en R."
+
+- Class: text
+  Output: "Atencion, son tres cosas distintas. (1) La distribucion de los DATOS es como se reparten los valores en la poblacion. (2) La distribucion de UNA MUESTRA es como se reparten los valores en una sola muestra. (3) La distribucion MUESTRAL de un estadistico es como se reparten los valores que ese estadistico toma al calcularlo en muchas muestras distintas."
+
+- Class: mult_question
+  Output: "Tomas 100 muestras de 5 estudiantes y calculas la media de cada una. Que distribucion forman esas 100 medias?"
+  AnswerChoices: La distribucion de los datos de la poblacion;La distribucion de una muestra;La distribucion muestral de la media;Ninguna de las anteriores
+  CorrectAnswer: La distribucion muestral de la media
+  AnswerTests: omnitest(correctVal='La distribucion muestral de la media')
+  Hint: Los valores que se reparten son medias, es decir un estadistico calculado en cada muestra.
+
+- Class: text
+  Output: "Distribucion muestral de la media: es la distribucion de las medias de todas las muestras posibles de tamano n. Su media es la media poblacional, y su desviacion estandar se llama error estandar y vale sigma/raiz(n) (Devore, 2015)."
+
+- Class: text
+  Output: "Teorema del limite central: con muestras suficientemente grandes (regla practica, n de 30 o mas) la distribucion muestral de la media es aproximadamente normal sin importar la forma de la poblacion. Si la poblacion ya es aproximadamente normal, tambien lo es con n pequeno (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "En el data frame estudiantes, la columna promedio contiene los promedios de 100 estudiantes. Extrae 100 muestras de tamano 5, calcula la media de cada una y guarda las 100 medias en medias_muestrales."
+  CorrectAnswer: medias_muestrales <- replicate(100, mean(sample(estudiantes$promedio, 5)))
+  AnswerTests: test_replicas(100, 6, 10)
+  Hint: replicate(n, expresion) repite la expresion n veces. La expresion debe tomar una muestra de 5 promedios y calcular su media.
+
+- Class: cmd_question
+  Output: "Observa la forma de esa distribucion muestral con un histograma de medias_muestrales."
+  CorrectAnswer: hist(medias_muestrales)
+  AnswerTests: omnitest(correctExpr='hist(medias_muestrales)')
+  Hint: La funcion hist() construye histogramas.
+
+- Class: cmd_question
+  Output: "Calcula la desviacion estandar de los promedios de los 100 estudiantes (la poblacion) para compararla despues. Guardala en sd_datos."
+  CorrectAnswer: sd_datos <- sd(estudiantes$promedio)
+  AnswerTests: omnitest(correctExpr='sd_datos <- sd(estudiantes$promedio)')
+  Hint: Aplica sd() a la columna promedio.
+
+- Class: cmd_question
+  Output: "Calcula ahora la desviacion estandar de las medias muestrales (esta es una estimacion del error estandar). Guardala en sd_medias."
+  CorrectAnswer: sd_medias <- sd(medias_muestrales)
+  AnswerTests: omnitest(correctExpr='sd_medias <- sd(medias_muestrales)')
+  Hint: Aplica sd() al vector medias_muestrales.
+
+- Class: mult_question
+  Output: "Compara sd_datos con sd_medias. Que observas y por que?"
+  AnswerChoices: Son iguales porque ambas vienen de la misma poblacion;sd_medias es menor porque promediar valores dentro de cada muestra reduce la variabilidad;sd_medias es mayor porque hay mas valores;No se pueden comparar
+  CorrectAnswer: sd_medias es menor porque promediar valores dentro de cada muestra reduce la variabilidad
+  AnswerTests: omnitest(correctVal='sd_medias es menor porque promediar valores dentro de cada muestra reduce la variabilidad')
+  Hint: Una media suaviza los valores extremos de la muestra. Compara sd_medias con sd_datos / sqrt(5).
+
+- Class: mult_question
+  Output: "Si la poblacion tiene varianza sigma^2, cual es la varianza de la distribucion muestral de la media para muestras de tamano n (muestreo con reemplazo o poblacion grande)?"
+  AnswerChoices: sigma^2 / n;sigma^2;sigma / raiz(n);n * sigma^2
+  CorrectAnswer: sigma^2 / n
+  AnswerTests: omnitest(correctVal='sigma^2 / n')
+  Hint: El error estandar es sigma/raiz(n). La varianza es ese valor al cuadrado.
+
+- Class: text
+  Output: "Distribucion muestral de la proporcion: se usa cuando la variable es binaria (por ejemplo, el usuario usa o no usa celular). El estadistico es la proporcion muestral p-gorro, es decir, la fraccion de la muestra con la caracteristica. Se aproxima a una normal cuando n por p y n por (1 - p) son al menos 5 (Martinez, 2020)."
+
+- Class: text
+  Output: "En el data frame usuarios, la columna dispositivo indica si cada usuario usa Movil, Laptop o Tablet."
+
+- Class: cmd_question
+  Output: "Extrae 50 muestras de tamano 10 de usuarios$dispositivo y calcula en cada una la proporcion de usuarios de Movil. Guarda las 50 proporciones en prop_movil."
+  CorrectAnswer: prop_movil <- replicate(50, mean(sample(usuarios$dispositivo, 10) == "Movil"))
+  AnswerTests: test_replicas(50, 0, 1, 0.1)
+  Hint: Comparar con == produce TRUE o FALSE por usuario, y la media de un vector logico es la proporcion de TRUE.
+
+- Class: mult_question
+  Output: "Cada valor de prop_movil es la proporcion de usuarios de Movil en una muestra de 10. Que representa el conjunto de las 50 proporciones?"
+  AnswerChoices: La distribucion de los datos de la poblacion;Una aproximacion a la distribucion muestral de la proporcion;La proporcion real de usuarios de Movil;Una sola muestra
+  CorrectAnswer: Una aproximacion a la distribucion muestral de la proporcion
+  AnswerTests: omnitest(correctVal='Una aproximacion a la distribucion muestral de la proporcion')
+  Hint: Es un estadistico (la proporcion) calculado en muchas muestras. Con 50 muestras solo es una aproximacion, porque no son todas las muestras posibles.
+
+- Class: text
+  Output: "Distribucion muestral de la varianza: la varianza muestral s al cuadrado cambia de una muestra a otra. Si la poblacion es normal, (n - 1) por s al cuadrado entre sigma al cuadrado sigue una distribucion chi-cuadrada con n - 1 grados de libertad, y por tanto la distribucion de s al cuadrado es asimetrica a la derecha (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "Extrae 200 muestras de tamano 10 de los promedios de estudiantes y calcula la varianza de cada una. Guarda las 200 varianzas en varianzas."
+  CorrectAnswer: varianzas <- replicate(200, var(sample(estudiantes$promedio, 10)))
+  AnswerTests: test_replicas(200, 0, 5)
+  Hint: Es el mismo esquema con replicate(), pero ahora calculas var() en lugar de mean().
+
+- Class: cmd_question
+  Output: "Observa la forma de la distribucion de las 200 varianzas con un histograma."
+  CorrectAnswer: hist(varianzas)
+  AnswerTests: omnitest(correctExpr='hist(varianzas)')
+  Hint: Usa hist() sobre el vector varianzas.
+
+- Class: mult_question
+  Output: "Segun el histograma, la distribucion muestral de la varianza..."
+  AnswerChoices: Es siempre simetrica como la de la media;Suele ser asimetrica, con una cola hacia valores grandes;Es igual para todos los tamanos de muestra;No varia entre muestras
+  CorrectAnswer: Suele ser asimetrica, con una cola hacia valores grandes
+  AnswerTests: omnitest(correctVal='Suele ser asimetrica, con una cola hacia valores grandes')
+  Hint: Observa de que lado se extiende el histograma. Una varianza no puede ser negativa.
+
+- Class: text
+  Output: "Resumen: la media, la proporcion y la varianza muestrales tienen cada una su propia distribucion muestral. La de la media tiene menor variabilidad que los datos (error estandar sigma/raiz(n)) y tiende a la normalidad; la de la proporcion depende de n y de p; la de la varianza es asimetrica. Estas ideas son la base de los intervalos de confianza de la Unidad 3. En la ultima leccion aplicaras todo en un problema de software."
+
+# REFERENCIAS (APA):
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Martinez, L. O. (2020). Apuntes de Estadistica. Universidad Autonoma de Ciudad Juarez.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

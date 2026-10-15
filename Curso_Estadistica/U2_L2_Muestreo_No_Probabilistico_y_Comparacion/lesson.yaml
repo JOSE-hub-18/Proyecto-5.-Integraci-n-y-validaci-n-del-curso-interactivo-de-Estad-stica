@@ -1,0 +1,94 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U2_L2_Muestreo_No_Probabilistico_y_Comparacion
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la leccion 2. Veremos el muestreo por conglomerados y el muestreo por conveniencia, y despues compararas todos los metodos para decidir cual usar en cada situacion."
+
+- Class: text
+  Output: "Muestreo por conglomerados: la poblacion ya esta dividida en grupos naturales (conglomerados), por ejemplo aulas, calles o sucursales. Se eligen al azar algunos conglomerados y se estudian TODOS los elementos de los conglomerados elegidos (Walpole et al., 2016)."
+
+- Class: text
+  Output: "Diferencia clave con estratificado: en el estratificado se toma una muestra de TODOS los estratos, que deben ser internamente homogeneos. En conglomerados solo se eligen ALGUNOS grupos y se observa cada uno completo; los grupos deberian parecerse entre si, cada uno como un pequeno reflejo de la poblacion. El estratificado suele ser mas preciso, y el de conglomerados suele ser mas barato y practico (Devore, 2015)."
+
+- Class: mult_question
+  Output: "Cual de las siguientes situaciones corresponde a muestreo por conglomerados?"
+  AnswerChoices: Elegir 3 aulas al azar y encuestar a todos los estudiantes de esas aulas;Elegir 30 estudiantes al azar de una lista completa;Dividir por carrera y tomar 10 estudiantes de cada una;Preguntar a los primeros 20 estudiantes que lleguen
+  CorrectAnswer: Elegir 3 aulas al azar y encuestar a todos los estudiantes de esas aulas
+  AnswerTests: omnitest(correctVal='Elegir 3 aulas al azar y encuestar a todos los estudiantes de esas aulas')
+  Hint: Busca la opcion donde se eligen grupos completos y despues se observa a todos sus integrantes.
+
+- Class: text
+  Output: "En el data frame estudiantes (100 alumnos, 5 semestres de 20 estudiantes cada uno) vamos a tratar cada semestre como un conglomerado."
+
+- Class: cmd_question
+  Output: "Simula un muestreo por conglomerados: elige 2 semestres al azar y toma a TODOS los estudiantes de esos semestres. Guarda el resultado en muestra_cong."
+  CorrectAnswer: muestra_cong <- estudiantes[estudiantes$semestre %in% sample(unique(estudiantes$semestre), 2), ]
+  AnswerTests: test_conglomerados()
+  Hint: Primero elige 2 semestres con sample(unique(...), 2). Luego filtra las filas cuyo semestre este en ese conjunto con el operador %in%.
+
+- Class: text
+  Output: "Muestreo por conveniencia: se selecciona a quienes estan disponibles o son faciles de alcanzar. Es rapido y economico, pero NO es probabilistico: no se conoce la probabilidad de seleccion de cada elemento, por lo que no permite generalizar con rigor estadistico a la poblacion (Walpole et al., 2016)."
+
+- Class: mult_question
+  Output: "Cual es el principal riesgo del muestreo por conveniencia?"
+  AnswerChoices: Que es costoso;Que puede ser sesgado y no representativo de la poblacion;Que es dificil de implementar;Que requiere mucho tiempo
+  CorrectAnswer: Que puede ser sesgado y no representativo de la poblacion
+  AnswerTests: omnitest(correctVal='Que puede ser sesgado y no representativo de la poblacion')
+  Hint: La facilidad de acceso no garantiza que la muestra refleje a la poblacion.
+
+- Class: text
+  Output: "Ahora un ejercicio de decision. Para cada situacion elige el metodo de muestreo mas apropiado. Piensa en que informacion tienes de la poblacion y en que se quiere lograr."
+
+- Class: mult_question
+  Output: "Situacion 1. Una empresa tiene una lista numerada de 20,000 facturas y quiere revisar 200. Quiere un metodo simple, con un patron de seleccion regular. Que metodo conviene?"
+  AnswerChoices: Aleatorio simple;Sistematico;Estratificado;Por conveniencia
+  CorrectAnswer: Sistematico
+  AnswerTests: omnitest(correctVal='Sistematico')
+  Hint: Hay una lista ordenada y se desea una regla fija, por ejemplo una de cada k. Cuidado, la lista no debe tener un patron periodico.
+
+- Class: mult_question
+  Output: "Situacion 2. Una universidad tiene 6 carreras de tamano muy distinto y quiere estimar la satisfaccion estudiantil, asegurando que TODAS las carreras queden representadas. Que metodo conviene?"
+  AnswerChoices: Aleatorio simple;Sistematico;Estratificado por carrera;Por conveniencia
+  CorrectAnswer: Estratificado por carrera
+  AnswerTests: omnitest(correctVal='Estratificado por carrera')
+  Hint: Hay subgrupos claros y se quiere garantizar representacion de cada uno.
+
+- Class: mult_question
+  Output: "Situacion 3. Un equipo de QA quiere medir la tasa de fallos en 1,200 servidores distribuidos en 30 centros de datos. Visitar todos los centros es muy costoso, pero visitar pocos y revisar todos sus servidores es viable. Que metodo conviene?"
+  AnswerChoices: Aleatorio simple;Estratificado;Por conglomerados;Por conveniencia
+  CorrectAnswer: Por conglomerados
+  AnswerTests: omnitest(correctVal='Por conglomerados')
+  Hint: Los centros de datos son grupos naturales y el costo depende de cuantos visites.
+
+- Class: mult_question
+  Output: "Situacion 4. Se publica un enlace a una encuesta de satisfaccion de una app en redes sociales y solo responden quienes quieren. Que tipo de muestreo es?"
+  AnswerChoices: Aleatorio simple;Por conveniencia;Estratificado;Sistematico
+  CorrectAnswer: Por conveniencia
+  AnswerTests: omnitest(correctVal='Por conveniencia')
+  Hint: Los participantes se autoseleccionan y no hay un mecanismo aleatorio de seleccion.
+
+- Class: mult_question
+  Output: "Situacion 5. Se tiene la lista completa y numerada de 5,000 usuarios registrados, todos con la misma importancia, y se quiere una muestra de 100 sin ninguna informacion adicional que justifique agruparlos. Que metodo es el mas directo?"
+  AnswerChoices: Aleatorio simple;Por conglomerados;Estratificado;Por conveniencia
+  CorrectAnswer: Aleatorio simple
+  AnswerTests: omnitest(correctVal='Aleatorio simple')
+  Hint: Si no hay subgrupos relevantes ni un motivo para agrupar, el metodo base es el mas adecuado.
+
+- Class: mult_question
+  Output: "Tomar una muestra por conveniencia puede ser aceptable cuando..."
+  AnswerChoices: Se necesita generalizar con precision a toda la poblacion;Se hace una exploracion preliminar y no se pretende generalizar;Se quiere estimar un margen de error exacto;Se desea el mejor metodo probabilistico
+  CorrectAnswer: Se hace una exploracion preliminar y no se pretende generalizar
+  AnswerTests: omnitest(correctVal='Se hace una exploracion preliminar y no se pretende generalizar')
+  Hint: Revisa la definicion. Que no puede hacerse con una muestra por conveniencia?
+
+- Class: text
+  Output: "Resumen: los metodos probabilisticos (aleatorio simple, sistematico, estratificado y por conglomerados) permiten inferencia estadistica porque se conoce la probabilidad de seleccion. La conveniencia es util en etapas exploratorias, pero no permite generalizar. La eleccion depende del objetivo, de la informacion disponible y del costo (Devore, 2015). En la siguiente leccion estudiaras las distribuciones muestrales."
+
+# REFERENCIAS (APA):
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

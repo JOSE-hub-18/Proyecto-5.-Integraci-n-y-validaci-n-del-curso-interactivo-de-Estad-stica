@@ -1,0 +1,126 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U3_L3_Confianza_Precision_Tamano_Muestra
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido a la Leccion 3: Confianza, precision y tamano de muestra. Aqui entenderas como el nivel de confianza y el tamano de muestra afectan la precision de un intervalo, y como determinar cuantos datos necesitas para lograr la precision que deseas."
+
+- Class: text
+  Output: "Objetivo de aprendizaje: al terminar esta leccion podras explicar la relacion entre nivel de confianza, margen de error y precision; comparar intervalos construidos con distintos niveles de confianza; observar el efecto del tamano de muestra sobre la precision; y determinar el tamano de muestra necesario para un margen de error deseado."
+
+- Class: text
+  Output: "El NIVEL DE CONFIANZA (por ejemplo 90%, 95% o 99%) indica que tan seguido, a la larga, el metodo de construccion del intervalo captura al verdadero parametro poblacional. El MARGEN DE ERROR es la mitad del ancho del intervalo, y la PRECISION se refiere a que tan angosto (especifico) es ese intervalo: entre mas angosto, mas preciso."
+
+- Class: mult_question
+  Output: "Si aumentas el nivel de confianza de 90% a 99% manteniendo el mismo tamano de muestra, que esperarias que le pase al ANCHO del intervalo de confianza?"
+  AnswerChoices: Se hace mas angosto (mas preciso);Se hace mas ancho (menos preciso);No cambia, el ancho solo depende del tamano de muestra;Se vuelve negativo
+  CorrectAnswer: Se hace mas ancho (menos preciso)
+  AnswerTests: omnitest(correctVal='Se hace mas ancho (menos preciso)')
+  Hint: "Para estar mas seguro (mayor confianza) de capturar el parametro, el intervalo necesita cubrir un rango mas amplio de valores."
+
+- Class: text
+  Output: "Vamos a comprobarlo con datos reales. Ya tienes cargada muestra_30, una muestra de 30 estudiantes con sus horas de estudio semanal."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 90% para la media usando t.test(muestra_30, conf.level = 0.90)$conf.int y guardalo en ic_90."
+  CorrectAnswer: ic_90 <- t.test(muestra_30, conf.level = 0.90)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_90 <- t.test(muestra_30, conf.level = 0.90)$conf.int')
+  Hint: "t.test() acepta el argumento conf.level para especificar el nivel de confianza deseado."
+
+- Class: cmd_question
+  Output: "Ahora construye el intervalo de confianza del 95% con t.test(muestra_30, conf.level = 0.95)$conf.int y guardalo en ic_95."
+  CorrectAnswer: ic_95 <- t.test(muestra_30, conf.level = 0.95)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_95 <- t.test(muestra_30, conf.level = 0.95)$conf.int')
+  Hint: "Es el mismo procedimiento que el paso anterior, cambiando conf.level a 0.95."
+
+- Class: cmd_question
+  Output: "Finalmente, construye el intervalo de confianza del 99% con t.test(muestra_30, conf.level = 0.99)$conf.int y guardalo en ic_99."
+  CorrectAnswer: ic_99 <- t.test(muestra_30, conf.level = 0.99)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_99 <- t.test(muestra_30, conf.level = 0.99)$conf.int')
+  Hint: "Mismo procedimiento, cambiando conf.level a 0.99."
+
+- Class: exact_question
+  Output: "Calcula el ancho del intervalo del 99% con diff(ic_99). Redondeado a un decimal, cuanto mide ese ancho?"
+  CorrectAnswer: 2.6
+  AnswerTests: val_en_rango(2.55, 2.65)
+  Hint: "diff() de un vector de dos elementos calcula la diferencia entre el segundo y el primero, es decir el ancho del intervalo."
+
+- Class: mult_question
+  Output: "Comparando ic_90, ic_95 e ic_99 (todos calculados con la misma muestra_30 de 30 estudiantes), el orden de menor a mayor ANCHO es 90% < 95% < 99%. Cual es la interpretacion correcta de este patron?"
+  AnswerChoices: Entre mayor confianza exiges, mas amplio (menos preciso) es el intervalo que necesitas para lograrla;Entre mayor confianza exiges, mas angosto es el intervalo;El ancho no tiene relacion con el nivel de confianza;Los tres intervalos deberian medir exactamente lo mismo
+  CorrectAnswer: Entre mayor confianza exiges, mas amplio (menos preciso) es el intervalo que necesitas para lograrla
+  AnswerTests: omnitest(correctVal='Entre mayor confianza exiges, mas amplio (menos preciso) es el intervalo que necesitas para lograrla')
+  Hint: "Hay un intercambio (trade-off) entre confianza y precision: no puedes maximizar ambas al mismo tiempo con el mismo tamano de muestra."
+
+- Class: text
+  Output: "Ahora veamos el efecto del TAMANO DE MUESTRA sobre la precision. Ya tienes cargada muestra_100, una muestra mas grande de 100 estudiantes de la misma poblacion."
+
+- Class: cmd_question
+  Output: "Construye un intervalo de confianza del 95% para la media usando muestra_100: t.test(muestra_100, conf.level = 0.95)$conf.int, y guardalo en ic_95_100."
+  CorrectAnswer: ic_95_100 <- t.test(muestra_100, conf.level = 0.95)$conf.int
+  AnswerTests: omnitest(correctExpr='ic_95_100 <- t.test(muestra_100, conf.level = 0.95)$conf.int')
+  Hint: "Mismo procedimiento que con muestra_30, pero usando el vector muestra_100."
+
+- Class: exact_question
+  Output: "Calcula el ancho de ic_95_100 con diff(ic_95_100). Redondeado a un decimal, cuanto mide?"
+  CorrectAnswer: 1.2
+  AnswerTests: val_en_rango(1.15, 1.25)
+  Hint: "Usa diff() igual que antes, ahora sobre ic_95_100."
+
+- Class: mult_question
+  Output: "El intervalo del 95% con n=30 (muestra_30) midio aproximadamente 1.9 de ancho, mientras que con n=100 (muestra_100) midio aproximadamente 1.2, MANTENIENDO el mismo nivel de confianza (95%). Que explica esta diferencia?"
+  AnswerChoices: Una muestra mas grande da menos informacion sobre la poblacion;Una muestra mas grande da mas informacion sobre la poblacion, lo que permite un intervalo mas angosto (mas preciso) sin sacrificar confianza;El resultado es una casualidad sin relacion con el tamano de muestra;El intervalo con n=100 deberia ser mas ancho porque hay mas datos que revisar
+  CorrectAnswer: Una muestra mas grande da mas informacion sobre la poblacion, lo que permite un intervalo mas angosto (mas preciso) sin sacrificar confianza
+  AnswerTests: omnitest(correctVal='Una muestra mas grande da mas informacion sobre la poblacion, lo que permite un intervalo mas angosto (mas preciso) sin sacrificar confianza')
+  Hint: "A diferencia del nivel de confianza, aumentar el tamano de muestra SI permite ganar precision sin sacrificar confianza."
+
+- Class: text
+  Output: "Por ultimo, veamos como DETERMINAR EL TAMANO DE MUESTRA necesario para lograr un margen de error especifico. La formula aproximada para la media es: n = (z * desviacion_estandar / margen_de_error_deseado) al cuadrado, donde z depende del nivel de confianza (z = 1.96 para 95%). Como la desviacion estandar de la poblacion no se conoce, se usa la de una muestra preliminar; por eso el resultado es una aproximacion."
+
+- Class: cmd_question
+  Output: "Ya tienes cargada la variable desviacion_estimada (la desviacion estandar de muestra_30). Calcula z_95 <- qnorm(0.975), el valor z correspondiente a 95% de confianza."
+  CorrectAnswer: z_95 <- qnorm(0.975)
+  AnswerTests: omnitest(correctExpr='z_95 <- qnorm(0.975)')
+  Hint: "Para un intervalo de dos colas al 95%, se usa el cuantil 0.975 de la distribucion normal estandar con la funcion qnorm()."
+
+- Class: cmd_question
+  Output: "Supon que quieres un margen de error de 0.5 horas con 95% de confianza. Calcula el tamano de muestra necesario con: n_necesaria <- ceiling((z_95 * desviacion_estimada / 0.5)^2)."
+  CorrectAnswer: n_necesaria <- ceiling((z_95 * desviacion_estimada / 0.5)^2)
+  AnswerTests: omnitest(correctExpr='n_necesaria <- ceiling((z_95 * desviacion_estimada / 0.5)^2)')
+  Hint: "ceiling() redondea hacia arriba, porque el tamano de muestra siempre debe ser un numero entero suficiente para lograr la precision deseada."
+
+- Class: exact_question
+  Output: "Cuantos estudiantes en total (n_necesaria) se necesitarian para lograr ese margen de error de 0.5 horas con 95% de confianza?"
+  CorrectAnswer: 104
+  AnswerTests: val_en_rango(104, 104)
+  Hint: "El resultado de n_necesaria deberia ser un numero bastante mayor a 30, ya que pedimos mucha mas precision de la que la muestra actual ofrece."
+
+- Class: mult_question
+  Output: "Si en vez de pedir un margen de error de 0.5 horas hubieras pedido uno mas estricto de 0.2 horas (misma confianza del 95%), que esperarias que pase con el tamano de muestra necesario?"
+  AnswerChoices: Se necesitaria una muestra mas pequena;Se necesitaria una muestra mas grande, porque exigir mas precision (menor margen de error) siempre cuesta mas datos;El tamano de muestra no cambia porque la confianza es la misma;Ya no seria posible calcularlo con la formula
+  CorrectAnswer: Se necesitaria una muestra mas grande, porque exigir mas precision (menor margen de error) siempre cuesta mas datos
+  AnswerTests: omnitest(correctVal='Se necesitaria una muestra mas grande, porque exigir mas precision (menor margen de error) siempre cuesta mas datos')
+  Hint: "En la formula, el margen de error deseado esta dividiendo; entre mas pequeno sea ese numero, mas grande se vuelve el resultado al elevarlo al cuadrado."
+
+- Class: text
+  Output: "Actividad integradora: vas a calcular el margen de error real que tendrias si usaras exactamente esos n_necesaria estudiantes con 95% de confianza, para comprobar que efectivamente se acerca a 0.5."
+
+- Class: cmd_question
+  Output: "Calcula margen_error_estimado <- z_95 * desviacion_estimada / sqrt(n_necesaria), y confirma que el resultado es cercano a 0.5."
+  CorrectAnswer: margen_error_estimado <- z_95 * desviacion_estimada / sqrt(n_necesaria)
+  AnswerTests: omnitest(correctExpr='margen_error_estimado <- z_95 * desviacion_estimada / sqrt(n_necesaria)')
+  Hint: "Es la formula inversa a la que usaste para calcular n_necesaria: despeja el margen de error en vez del tamano de muestra."
+
+- Class: mult_question
+  Output: "A lo largo de esta leccion viste tres formas de mover la precision de una estimacion: cambiar el nivel de confianza, cambiar el tamano de muestra, y fijar de antemano un margen de error deseado. Cual de las siguientes afirmaciones resume mejor la relacion entre estos tres elementos?"
+  AnswerChoices: Los tres son independientes entre si y no se pueden combinar;Mayor confianza o menor margen de error deseado requieren un mayor tamano de muestra;Solo el tamano de muestra afecta la precision, la confianza no;Entre menos confianza se pida, mas grande debe ser la muestra
+  CorrectAnswer: Mayor confianza o menor margen de error deseado requieren un mayor tamano de muestra
+  AnswerTests: omnitest(correctVal='Mayor confianza o menor margen de error deseado requieren un mayor tamano de muestra')
+  Hint: "Revisa la formula del tamano de muestra: n crece cuando z aumenta (mas confianza) y tambien cuando el margen de error deseado disminuye."
+
+- Class: text
+  Output: "Resumen de la Leccion 3: comparaste intervalos de confianza al 90%, 95% y 99% con la misma muestra; observaste como una muestra mas grande produce intervalos mas angostos sin sacrificar confianza; y calculaste el tamano de muestra necesario para lograr un margen de error especifico. Con esto completas las tres lecciones de estimacion estadistica del Proyecto 3."

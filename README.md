@@ -1,1 +1,1 @@
-# Proyecto-5.-Integraci-n-y-validaci-n-del-curso-interactivo-de-Estad-stica
+# Proyecto-5.-Integracion-y-validacion-del-curso-interactivo-de-Estadistica

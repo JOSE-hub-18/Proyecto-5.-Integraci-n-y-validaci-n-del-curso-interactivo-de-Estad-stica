@@ -1,0 +1,293 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U1_L1_Poblacion_Muestra_Parametro_Estadistico
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: >-
+    Bienvenido a la practica de estadistica descriptiva sobre Poblacion,
+    muestra, parametro y estadistico. En esta leccion repasaremos estos
+    cuatro conceptos fundamentales y los aplicaremos usando R.
+
+- Class: text
+  Output: >-
+    Al finalizar esta practica podras distinguir entre poblacion y muestra,
+    y entre parametro y estadistico, ademas de calcularlos usando funciones
+    basicas de R.
+
+- Class: text
+  Output: >-
+    Objetivo de aprendizaje: identificar y diferenciar los conceptos de
+    poblacion, muestra, parametro y estadistico, y calcularlos correctamente
+    utilizando R.
+
+- Class: text
+  Output: >-
+    Antes de comenzar, recuerda que en R un vector se crea con la funcion
+    c(), y que funciones como mean(), sd() y length() nos permiten resumir
+    conjuntos de datos numericos.
+
+- Class: text
+  Output: >-
+    Definicion 1: la poblacion es el conjunto completo de elementos, personas
+    u objetos sobre los que se desea obtener informacion. Incluye a todos los
+    elementos posibles, sin excepcion.
+
+- Class: text
+  Output: >-
+    Ejemplo 1 (situacion real): si un instituto de salud quiere conocer la
+    estatura promedio de todos los adultos de una ciudad, la poblacion son
+    TODOS los adultos que viven en esa ciudad.
+
+- Class: text
+  Output: >-
+    Ejemplo 2 (Ingenieria de Software): si una empresa quiere conocer el
+    tiempo de respuesta de TODOS sus servidores en produccion, esos
+    servidores conforman la poblacion de estudio.
+
+- Class: mult_question
+  Output: >-
+    Cual de las siguientes opciones describe mejor una poblacion en
+    estadistica?
+  AnswerChoices: El subconjunto de datos seleccionado para un estudio;El conjunto completo de elementos sobre el que se desea obtener informacion;Un valor calculado a partir de una muestra;Un valor numerico que describe una muestra
+  CorrectAnswer: El conjunto completo de elementos sobre el que se desea obtener informacion
+  AnswerTests: omnitest(correctVal='El conjunto completo de elementos sobre el que se desea obtener informacion')
+  Hint: >-
+    Piensa en la palabra "completo": la poblacion no deja fuera a ningun
+    elemento.
+
+- Class: text
+  Output: >-
+    Definicion 2: la muestra es un subconjunto representativo de la
+    poblacion, seleccionado para analizar y sacar conclusiones sin necesidad
+    de estudiar a todos los elementos.
+
+- Class: text
+  Output: >-
+    Ejemplo 3 (Ingenieria de Software): en lugar de revisar los tiempos de
+    respuesta de los 500 servidores de la empresa, un ingeniero analiza
+    solamente 50 de ellos, elegidos al azar. Esos 50 servidores son la
+    muestra.
+
+- Class: cmd_question
+  Output: >-
+    Crea el vector poblacion_edades con las edades de TODOS los empleados de
+    una empresa de software (poblacion completa de 10 personas):
+    23, 45, 31, 29, 52, 38, 41, 27, 33, 49.
+  CorrectAnswer: poblacion_edades <- c(23, 45, 31, 29, 52, 38, 41, 27, 33, 49)
+  AnswerTests: omnitest(correctExpr='poblacion_edades <- c(23, 45, 31, 29, 52, 38, 41, 27, 33, 49)')
+  Hint: >-
+    Usa el operador de asignacion <- junto con la funcion c() para crear el
+    vector.
+
+- Class: cmd_question
+  Output: >-
+    Ahora crea una muestra aleatoria de 4 empleados a partir de
+    poblacion_edades, guardala en un objeto llamado muestra_edades, usando
+    la funcion sample().
+  CorrectAnswer: muestra_edades <- sample(poblacion_edades, 4)
+  AnswerTests: omnitest(correctExpr='muestra_edades <- sample(poblacion_edades, 4)')
+  Hint: >-
+    La funcion sample(vector, n) selecciona n elementos al azar de un
+    vector.
+
+- Class: mult_question
+  Output: >-
+    Que es una muestra?
+  AnswerChoices: Un subconjunto representativo de la poblacion;La poblacion completa;Un promedio de todos los datos;Un error de medicion
+  CorrectAnswer: Un subconjunto representativo de la poblacion
+  AnswerTests: omnitest(correctVal='Un subconjunto representativo de la poblacion')
+  Hint: >-
+    Recuerda que la muestra siempre es una PARTE de la poblacion, nunca el
+    total.
+
+- Class: text
+  Output: >-
+    Definicion 3: el parametro es un valor numerico fijo que describe una
+    caracteristica de TODA la poblacion. Casi siempre es desconocido, porque
+    rara vez se puede medir a toda la poblacion.
+
+- Class: text
+  Output: >-
+    Ejemplo 4 (situacion real): el porcentaje real de todos los votantes de
+    un pais que apoyan cierta propuesta es un parametro, ya que involucra a
+    la poblacion completa de votantes.
+
+- Class: cmd_question
+  Output: >-
+    Calcula el parametro (la media poblacional) del vector poblacion_edades
+    usando la funcion mean().
+  CorrectAnswer: mean(poblacion_edades)
+  AnswerTests: omnitest(correctExpr='mean(poblacion_edades)')
+  Hint: >-
+    Utiliza la funcion mean() aplicada directamente sobre poblacion_edades.
+
+- Class: mult_question
+  Output: >-
+    Cual de las siguientes es un ejemplo de parametro?
+  AnswerChoices: La media de edad de TODOS los empleados de la empresa;La media de edad de 4 empleados seleccionados al azar;El numero de encuestas realizadas;El nombre de la variable estudiada
+  CorrectAnswer: La media de edad de TODOS los empleados de la empresa
+  AnswerTests: omnitest(correctVal='La media de edad de TODOS los empleados de la empresa')
+  Hint: >-
+    El parametro siempre se calcula sobre la poblacion completa, no sobre
+    una parte de ella.
+
+- Class: text
+  Output: >-
+    Definicion 4: el estadistico es un valor numerico calculado a partir de
+    una muestra. Se utiliza como una estimacion del parametro
+    correspondiente, ya que no siempre es posible medir a toda la poblacion.
+
+- Class: text
+  Output: >-
+    Ejemplo 5 (Ingenieria de Software): si un equipo mide el tiempo promedio
+    de carga de una aplicacion usando datos de solo 100 usuarios de prueba
+    (de miles de usuarios totales), ese promedio es un estadistico.
+
+- Class: cmd_question
+  Output: >-
+    Calcula el estadistico (la media muestral) del vector muestra_edades
+    usando la funcion mean().
+  CorrectAnswer: mean(muestra_edades)
+  AnswerTests: omnitest(correctExpr='mean(muestra_edades)')
+  Hint: >-
+    Igual que antes, usa mean(), pero ahora sobre el vector muestra_edades.
+
+- Class: mult_question
+  Output: >-
+    Cual de las siguientes es un ejemplo de estadistico?
+  AnswerChoices: La media de tiempos de respuesta calculada a partir de una muestra de servidores;La media de tiempos de respuesta de TODOS los servidores de la empresa;El total de servidores existentes;La lista completa de servidores
+  CorrectAnswer: La media de tiempos de respuesta calculada a partir de una muestra de servidores
+  AnswerTests: omnitest(correctVal='La media de tiempos de respuesta calculada a partir de una muestra de servidores')
+  Hint: >-
+    El estadistico siempre proviene de datos de una MUESTRA, no de la
+    poblacion completa.
+
+- Class: mult_question
+  Output: >-
+    En una empresa de software con 500 desarrolladores, se analiza el
+    tiempo de codificacion de solo 50 de ellos. Que representan esos 50
+    desarrolladores?
+  AnswerChoices: La poblacion;Un parametro;Una muestra;Un estadistico
+  CorrectAnswer: Una muestra
+  AnswerTests: omnitest(correctVal='Una muestra')
+  Hint: >-
+    Son una parte seleccionada de un grupo mas grande, no el grupo completo
+    ni un numero calculado.
+
+- Class: exact_question
+  Output: >-
+    Cuantos empleados conforman la poblacion completa representada en el
+    vector poblacion_edades?
+  CorrectAnswer: 10
+  AnswerTests: omnitest(correctVal=10)
+  Hint: >-
+    Puedes usar length(poblacion_edades) en la consola para comprobarlo.
+
+- Class: exact_question
+  Output: >-
+    Si la media poblacional (parametro) del tiempo de respuesta de todos
+    los servidores es 42 ms, y la media de una muestra de 5 servidores
+    (estadistico) fue de 39 ms, cual es la diferencia en valor absoluto
+    entre el parametro y el estadistico?
+  CorrectAnswer: 3
+  AnswerTests: omnitest(correctVal=3)
+  Hint: >-
+    Resta el valor menor al mayor: 42 - 39.
+
+- Class: mult_question
+  Output: >-
+    Ejercicio de interpretacion: al comparar mean(poblacion_edades) con
+    mean(muestra_edades), es muy probable que los resultados sean
+    diferentes. Como se interpreta correctamente esta diferencia?
+  AnswerChoices: El estadistico siempre debe ser identico al parametro;El estadistico es una estimacion del parametro y puede variar segun la muestra seleccionada;La poblacion cambio de valor;El parametro esta mal calculado
+  CorrectAnswer: El estadistico es una estimacion del parametro y puede variar segun la muestra seleccionada
+  AnswerTests: omnitest(correctVal='El estadistico es una estimacion del parametro y puede variar segun la muestra seleccionada')
+  Hint: >-
+    El estadistico depende de que elementos caen en la muestra; por eso no
+    siempre coincide exactamente con el parametro.
+
+- Class: mult_question
+  Output: >-
+    Ejercicio de interpretacion: si tomas varias muestras distintas de la
+    misma poblacion_edades y calculas la media de cada una, notaras que los
+    resultados varian un poco entre si. Que concepto explica este
+    comportamiento?
+  AnswerChoices: Error de muestreo (variabilidad muestral);Error del parametro;Una falla del programa R;Un cambio en la poblacion
+  CorrectAnswer: Error de muestreo (variabilidad muestral)
+  AnswerTests: omnitest(correctVal='Error de muestreo (variabilidad muestral)')
+  Hint: >-
+    Cada muestra aleatoria toma elementos distintos, lo que genera pequenas
+    variaciones naturales en los resultados.
+
+- Class: text
+  Output: >-
+    Actividad integradora: ahora aplicaras todo lo aprendido con un nuevo
+    conjunto de datos. Una empresa de software tiene 10 servidores en
+    produccion; a continuacion trabajaras con la poblacion completa y una
+    muestra de ella.
+
+- Class: cmd_question
+  Output: >-
+    Crea el vector tiempos_respuesta con los tiempos de respuesta en
+    milisegundos de LOS 10 servidores (poblacion completa):
+    200, 180, 220, 195, 210, 205, 190, 215, 198, 208.
+  CorrectAnswer: tiempos_respuesta <- c(200, 180, 220, 195, 210, 205, 190, 215, 198, 208)
+  AnswerTests: omnitest(correctExpr='tiempos_respuesta <- c(200, 180, 220, 195, 210, 205, 190, 215, 198, 208)')
+  Hint: >-
+    Usa c() con los 10 valores en el mismo orden en que se presentan.
+
+- Class: cmd_question
+  Output: >-
+    Calcula el parametro: la media poblacional de tiempos_respuesta.
+  CorrectAnswer: mean(tiempos_respuesta)
+  AnswerTests: omnitest(correctExpr='mean(tiempos_respuesta)')
+  Hint: >-
+    Aplica mean() sobre el vector completo tiempos_respuesta.
+
+- Class: cmd_question
+  Output: >-
+    Selecciona una muestra aleatoria de 4 servidores y guardala en
+    muestra_tiempos usando sample().
+  CorrectAnswer: muestra_tiempos <- sample(tiempos_respuesta, 4)
+  AnswerTests: omnitest(correctExpr='muestra_tiempos <- sample(tiempos_respuesta, 4)')
+  Hint: >-
+    Usa sample(tiempos_respuesta, 4) para elegir 4 valores al azar.
+
+- Class: cmd_question
+  Output: >-
+    Calcula el estadistico: la media de la muestra muestra_tiempos.
+  CorrectAnswer: mean(muestra_tiempos)
+  AnswerTests: omnitest(correctExpr='mean(muestra_tiempos)')
+  Hint: >-
+    Aplica mean() sobre muestra_tiempos, no sobre la poblacion completa.
+
+- Class: mult_question
+  Output: >-
+    Para cerrar la actividad integradora: si el valor de mean(tiempos_respuesta)
+    (parametro) y el de mean(muestra_tiempos) (estadistico) no son iguales,
+    esto significa que...
+  AnswerChoices: El estadistico esta sirviendo como una estimacion aproximada del parametro, algo esperado y normal;Alguno de los dos calculos esta mal hecho;La poblacion no es valida;R esta funcionando mal
+  CorrectAnswer: El estadistico esta sirviendo como una estimacion aproximada del parametro, algo esperado y normal
+  AnswerTests: omnitest(correctVal='El estadistico esta sirviendo como una estimacion aproximada del parametro, algo esperado y normal')
+  Hint: >-
+    Recuerda: el estadistico rara vez es identico al parametro; su funcion
+    es aproximarlo.
+
+- Class: text
+  Output: >-
+    Resumen: la poblacion es el conjunto completo de elementos de interes,
+    mientras que la muestra es un subconjunto de ella. El parametro
+    describe numericamente a la poblacion (casi siempre desconocido), y el
+    estadistico describe numericamente a la muestra y se usa para estimar
+    el parametro. En R, funciones como c(), sample(), mean() y length() nos
+    permiten trabajar con estos cuatro conceptos.
+
+- Class: text
+  Output: >-
+    Felicidades, has completado la practica de Poblacion, muestra,
+    parametro y estadistico. Estos conceptos son la base de toda la
+    estadistica inferencial que veras mas adelante en el curso.

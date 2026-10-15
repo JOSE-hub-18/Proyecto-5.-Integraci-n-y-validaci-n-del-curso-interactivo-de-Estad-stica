@@ -1,0 +1,123 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U1_L4_Media_Mediana_Moda
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+- Class: text
+  Output: "Bienvenido a la practica interactiva de Estadistica Descriptiva. Hoy repasaremos las principales medidas de tendencia central: Media, Mediana y Moda."
+
+- Class: text
+  Output: "Objetivo de aprendizaje: Al finalizar esta practica, identificaras las diferencias entre media, mediana y moda, calcularas cada una de ellas manualmente y mediante R, e interpretaras su significado en contextos reales de Ingenieria de Software."
+
+- Class: text
+  Output: "Concepto 1: Media aritmetica. Se calcula sumando todos los valores de un conjunto de datos y dividiendo el resultado entre el numero total de observaciones. Es el 'promedio' comun. Ejemplo en IS: El promedio de errores encontrados por modulo en una aplicacion."
+
+- Class: mult_question
+  Output: "Cual de las siguientes operaciones describe correctamente el calculo de la media?"
+  AnswerChoices: Sumar todos los valores y dividir entre el total;Restar el valor minimo del maximo;Ordenar los datos y elegir el central;Contar el valor que mas se repite
+  CorrectAnswer: Sumar todos los valores y dividir entre el total
+  AnswerTests: omnitest(correctVal='Sumar todos los valores y dividir entre el total')
+  Hint: Recuerda la definicion basica de 'promedio'.
+
+- Class: text
+  Output: "Ejemplo en Ingenieria de Software: Un equipo de desarrollo registro los siguientes errores en 5 modulos: 5, 3, 7, 4 y 6. Vamos a trabajar con estos datos en R."
+
+- Class: cmd_question
+  Output: "Ejercicio de codigo 1: Crea un vector llamado 'errores' con los valores 5, 3, 7, 4 y 6."
+  CorrectAnswer: errores <- c(5, 3, 7, 4, 6)
+  AnswerTests: omnitest(correctExpr='errores <- c(5, 3, 7, 4, 6)')
+  Hint: Usa el operador de asignacion <- y la funcion c().
+
+- Class: cmd_question
+  Output: "Ejercicio de codigo 2: Ahora, calcula la media del vector 'errores' utilizando la funcion correspondiente en R."
+  CorrectAnswer: mean(errores)
+  AnswerTests: omnitest(correctExpr='mean(errores)')
+  Hint: La funcion para calcular la media en R se llama 'mean()'.
+
+- Class: text
+  Output: "Concepto 2: Mediana. Es el valor que se encuentra en la posicion central de un conjunto de datos ordenados de menor a mayor. Si el numero de datos es par, se calcula promediando los dos valores centrales. A diferencia de la media, se ve mucho menos afectada por valores extremos (outliers) que la media."
+
+- Class: exact_question
+  Output: "Pregunta numerica 1: Calcula manualmente la mediana del siguiente conjunto de datos: 12, 15, 14, 18, 16. (Escribe solo el numero)."
+  CorrectAnswer: 15
+  AnswerTests: omnitest(correctVal=15)
+  Hint: "Primero ordena los datos de menor a mayor. Con 5 datos, la mediana es el que queda en la posicion central."
+
+- Class: text
+  Output: "Concepto 3: Moda. Es el valor que aparece con mayor frecuencia en un conjunto de datos. Un conjunto puede tener una moda (unimodal), dos modas (bimodal) o ninguna moda (si todos los valores son unicos)."
+
+- Class: mult_question
+  Output: "Cual de estas medidas de tendencia central es mas resistente (menos afectada) por valores atipicos o extremos?"
+  AnswerChoices: Media;Mediana;Moda;Varianza
+  CorrectAnswer: Mediana
+  AnswerTests: omnitest(correctVal='Mediana')
+  Hint: Piensa en el sueldo de un equipo donde alguien gana 1 millon de dolares. El promedio o el sueldo del medio representa mejor al equipo?
+
+- Class: text
+  Output: "Ejemplo en Ingenieria de Software: Se encuesto a 6 desarrolladores sobre su lenguaje de programacion favorito: Java, Python, Java, C++, Python y Java. La moda seria Java, ya que es el que mas se repite."
+
+- Class: cmd_question
+  Output: "Ejercicio de codigo 3: Crea un vector llamado 'lenguajes' con los valores: 'Java', 'Python', 'Java', 'C++', 'Python', 'Java'."
+  CorrectAnswer: lenguajes <- c("Java", "Python", "Java", "C++", "Python", "Java")
+  AnswerTests: omnitest(correctExpr='lenguajes <- c("Java", "Python", "Java", "C++", "Python", "Java")')
+  Hint: Recuerda usar comillas dobles para texto y la funcion c().
+
+- Class: cmd_question
+  Output: "Ejercicio de codigo 4: Utiliza la funcion table() sobre el vector 'lenguajes' para ver la frecuencia de cada lenguaje y asi identificar la moda visualmente."
+  CorrectAnswer: table(lenguajes)
+  AnswerTests: omnitest(correctExpr='table(lenguajes)')
+  Hint: La funcion table() cuenta las frecuencias de los elementos.
+
+- Class: mult_question
+  Output: "Interpretacion: Segun el resultado de table(lenguajes), cual es el lenguaje favorito (la moda) en este grupo de desarrolladores?"
+  AnswerChoices: Java;Python;C++;Ninguno
+  CorrectAnswer: Java
+  AnswerTests: omnitest(correctVal='Java')
+  Hint: Revisa cual lenguaje tiene la frecuencia mas alta en la salida de table().
+
+- Class: text
+  Output: "Relacion entre Media y Mediana: Cuando los datos son simetricos, media y mediana son casi iguales. Si la media es mayor que la mediana, suele haber sesgo positivo (cola hacia la derecha). Si la media es menor que la mediana, suele haber sesgo negativo (cola hacia la izquierda)."
+
+- Class: mult_question
+  Output: "Interpretacion: En un proyecto de software, los tiempos de ejecucion (en ms) de 7 consultas a la base de datos son: 30, 25, 28, 35, 32, 40, 29. Si la media calculada es 31.29 y la mediana es 30, que tipo de sesgo podriamos intuir?"
+  AnswerChoices: Sesgo positivo (cola a la derecha);Sesgo negativo (cola a la izquierda);Distribucion perfectamente simetrica;No se puede determinar
+  CorrectAnswer: Sesgo positivo (cola a la derecha)
+  AnswerTests: omnitest(correctVal='Sesgo positivo (cola a la derecha)')
+  Hint: "Compara los valores: Media (31.29) vs Mediana (30). Cual es mayor? Eso indica hacia donde se estiran los datos."
+
+- Class: mult_question
+  Output: "Conceptual: En un conjunto de datos donde todos los valores son diferentes (ej. 1, 2, 3, 4, 5), que podemos afirmar sobre la moda?"
+  AnswerChoices: No existe moda;La moda es 3;La moda es el promedio;La moda es el valor maximo
+  CorrectAnswer: No existe moda
+  AnswerTests: omnitest(correctVal='No existe moda')
+  Hint: La moda necesita que un valor se repita al menos dos veces.
+
+- Class: exact_question
+  Output: "Pregunta numerica 2: Calcula la media del vector c(10, 20, 30, 40). Escribe solo el numero."
+  CorrectAnswer: 25
+  AnswerTests: omnitest(correctVal=25)
+  Hint: Suma 10+20+30+40 = 100, luego divide entre 4 (el total de elementos).
+
+- Class: text
+  Output: "ACTIVIDAD INTEGRADORA. Vamos a poner en practica todo lo aprendido. Utiliza el vector 'errores' que creaste al principio (5, 3, 7, 4, 6). Calcula la mediana y reflexiona sobre la moda."
+
+- Class: cmd_question
+  Output: "Paso 1 de la integradora: Calcula la mediana del vector 'errores' utilizando R."
+  CorrectAnswer: median(errores)
+  AnswerTests: omnitest(correctExpr='median(errores)')
+  Hint: La funcion en R es 'median()'.
+
+- Class: mult_question
+  Output: "Paso 2 de la integradora: Basado en los resultados de 'errores' (media=5, mediana=5), y sabiendo que ningun valor se repite (moda inexistente), como describirias la distribucion de errores por modulo?"
+  AnswerChoices: Es simetrica o sin sesgo significativo;Tiene sesgo positivo;Tiene sesgo negativo;Es bimodal
+  CorrectAnswer: Es simetrica o sin sesgo significativo
+  AnswerTests: omnitest(correctVal='Es simetrica o sin sesgo significativo')
+  Hint: Si la media y la mediana son practicamente iguales, los datos tienden a ser simetricos.
+
+- Class: text
+  Output: "RESUMEN FINAL: Has aprendido que la Media es el promedio aritmetico y es sensible a valores extremos; la Mediana es el valor central y es robusta; y la Moda es el valor mas frecuente. En Ingenieria de Software, estas medidas nos ayudan a resumir tiempos de respuesta, cantidad de bugs, sprints, horas de trabajo, etc., para tomar mejores decisiones. Excelente trabajo!"
+
+- Class: text
+  Output: "Fin de la practica. Has completado exitosamente el repaso de Media, Mediana y Moda. No olvides probar nuevamente la practica con un companero para verificar su funcionamiento."

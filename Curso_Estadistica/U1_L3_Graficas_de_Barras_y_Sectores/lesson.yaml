@@ -1,0 +1,183 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U1_L3_Graficas_de_Barras_y_Sectores
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: Bienvenido a la practica interactiva de Graficas de Barras y Graficas de Sectores.
+
+- Class: text
+  Output: En esta leccion revisaremos como representar datos cualitativos mediante graficas de barras y graficas de sectores (tambien llamadas graficas de pastel), y como construirlas en R.
+
+- Class: text
+  Output: Al finalizar esta practica podras identificar cuando usar una grafica de barras o una grafica de sectores, y podras construir e interpretar ambas usando R.
+
+- Class: text
+  Output: Definicion 1. Una grafica de barras representa la frecuencia de cada categoria mediante barras separadas, cuya altura es proporcional a la frecuencia.
+
+- Class: text
+  Output: Definicion 2. Una grafica de sectores (o de pastel) representa la proporcion de cada categoria respecto al total, dividiendo un circulo en porciones.
+
+- Class: text
+  Output: Definicion 3. Ambas graficas se utilizan principalmente para representar variables cualitativas (nominales u ordinales), aunque tambien pueden usarse con variables cuantitativas discretas agrupadas en categorias.
+
+- Class: text
+  Output: Definicion 4. La grafica de barras es mas util cuando se quiere comparar la frecuencia entre categorias. La grafica de sectores es mas util cuando se quiere mostrar que proporcion representa cada categoria del total.
+
+- Class: text
+  Output: Definicion 5. En R, la funcion barplot() genera graficas de barras y la funcion pie() genera graficas de sectores. Ambas funciones reciben un vector de frecuencias como argumento principal.
+
+- Class: text
+  Output: Ejemplo 1. Una tienda registra sus ventas semanales por region, Norte, Sur, Este y Oeste. Una grafica de barras permite comparar rapidamente que region vendio mas.
+
+- Class: text
+  Output: Ejemplo 2. Una encuesta pregunta el medio de transporte que usan los estudiantes para llegar a la universidad. Una grafica de sectores muestra que porcentaje del total usa cada medio.
+
+- Class: text
+  Output: Ejemplo 3, Ingenieria de Software. Un equipo registra el numero de errores (bugs) reportados por modulo del sistema, Login, Pagos, Reportes y Perfil. Una grafica de barras permite identificar rapidamente que modulo concentra mas errores.
+
+- Class: cmd_question
+  Output: Vamos a trabajar con el ejemplo de los modulos. Crea un vector llamado modulos con los valores "Login", "Pagos", "Reportes" y "Perfil".
+  CorrectAnswer: modulos <- c("Login", "Pagos", "Reportes", "Perfil")
+  AnswerTests: omnitest(correctExpr='modulos <- c("Login", "Pagos", "Reportes", "Perfil")')
+  Hint: Utiliza el operador de asignacion <- y la funcion c() con los cuatro nombres entre comillas.
+
+- Class: cmd_question
+  Output: Ahora crea un vector llamado errores con la cantidad de bugs reportados en cada modulo, en el mismo orden, 12, 5, 8 y 3.
+  CorrectAnswer: errores <- c(12, 5, 8, 3)
+  AnswerTests: omnitest(correctExpr='errores <- c(12, 5, 8, 3)')
+  Hint: Usa errores <- c(12, 5, 8, 3), respetando el orden de Login, Pagos, Reportes y Perfil.
+
+- Class: cmd_question
+  Output: Para que la grafica muestre el nombre de cada modulo en lugar de solo numeros, asigna los nombres del vector modulos como nombres del vector errores usando la funcion names().
+  CorrectAnswer: names(errores) <- modulos
+  AnswerTests: omnitest(correctExpr='names(errores) <- modulos')
+  Hint: La sintaxis es names(vector_a_nombrar) <- vector_con_los_nombres.
+
+- Class: cmd_question
+  Output: Genera ahora la grafica de barras de errores usando la funcion barplot().
+  CorrectAnswer: barplot(errores)
+  AnswerTests: omnitest(correctExpr='barplot(errores)')
+  Hint: Escribe barplot(errores).
+
+- Class: text
+  Output: Observa la grafica que acabas de generar.
+
+- Class: mult_question
+  Output: Segun la grafica de barras que generaste, cual modulo concentra mas errores reportados?
+  AnswerChoices: Login;Pagos;Reportes;Perfil
+  CorrectAnswer: Login
+  AnswerTests: omnitest(correctVal='Login')
+  Hint: Observa cual barra es la mas alta en la grafica.
+
+- Class: mult_question
+  Output: Cual de las siguientes afirmaciones describe mejor una grafica de barras?
+  AnswerChoices: Representa la frecuencia de cada categoria mediante barras separadas;Representa proporciones del total en forma de circulo;Solo puede usarse con variables numericas continuas;Muestra la relacion entre dos variables cuantitativas
+  CorrectAnswer: Representa la frecuencia de cada categoria mediante barras separadas
+  AnswerTests: omnitest(correctVal='Representa la frecuencia de cada categoria mediante barras separadas')
+  Hint: Piensa en la definicion 1 que revisamos al inicio de la practica.
+
+- Class: mult_question
+  Output: Cual de las siguientes afirmaciones describe mejor una grafica de sectores?
+  AnswerChoices: Compara frecuencias absolutas mediante barras;Divide un circulo en porciones proporcionales al total;Solo se usa para datos cuantitativos continuos;Requiere siempre mas de diez categorias
+  CorrectAnswer: Divide un circulo en porciones proporcionales al total
+  AnswerTests: omnitest(correctVal='Divide un circulo en porciones proporcionales al total')
+  Hint: Recuerda la definicion 2 sobre la grafica de sectores.
+
+- Class: mult_question
+  Output: Cual funcion de R se utiliza para generar una grafica de sectores?
+  AnswerChoices: barplot();pie();hist();boxplot()
+  CorrectAnswer: pie()
+  AnswerTests: omnitest(correctVal='pie()')
+  Hint: Es una funcion cuyo nombre en ingles significa pastel.
+
+- Class: mult_question
+  Output: En una encuesta sobre medio de transporte, cual grafica es mas adecuada si quieres mostrar que porcentaje del total representa cada medio de transporte?
+  AnswerChoices: Grafica de barras;Grafica de sectores;Histograma;Diagrama de caja
+  CorrectAnswer: Grafica de sectores
+  AnswerTests: omnitest(correctVal='Grafica de sectores')
+  Hint: Piensa en cual grafica esta pensada para mostrar proporciones del total.
+
+- Class: mult_question
+  Output: Que tipo de variable se representa con mayor frecuencia mediante graficas de barras o de sectores?
+  AnswerChoices: Variables cualitativas;Variables cuantitativas continuas sin agrupar;Variables aleatorias continuas;Solo variables numericas negativas
+  CorrectAnswer: Variables cualitativas
+  AnswerTests: omnitest(correctVal='Variables cualitativas')
+  Hint: Recuerda la definicion 3 de esta practica.
+
+- Class: exact_question
+  Output: Si el modulo de Pagos tiene 5 errores de un total de 28 errores en todo el sistema, que porcentaje del total representa el modulo de Pagos? (Redondea a numero entero)
+  CorrectAnswer: 18
+  AnswerTests: omnitest(correctVal=18)
+  Hint: Calcula (5 / 28) * 100 y redondea al entero mas cercano.
+
+- Class: exact_question
+  Output: Si una grafica de barras muestra las frecuencias 12, 5, 8 y 3 para cuatro categorias, cual es la frecuencia total?
+  CorrectAnswer: 28
+  AnswerTests: omnitest(correctVal=28)
+  Hint: Suma los cuatro valores, 12 + 5 + 8 + 3.
+
+- Class: cmd_question
+  Output: Genera ahora la grafica de sectores del vector errores usando la funcion pie().
+  CorrectAnswer: pie(errores)
+  AnswerTests: omnitest(correctExpr='pie(errores)')
+  Hint: Escribe pie(errores).
+
+- Class: mult_question
+  Output: Comparando la grafica de barras y la grafica de sectores que generaste con los mismos datos, cual afirmacion es correcta?
+  AnswerChoices: La grafica de barras facilita comparar cantidades entre modulos, mientras que la de sectores facilita ver la proporcion de cada modulo;Ambas graficas muestran exactamente la misma informacion sin ninguna diferencia;La grafica de sectores es mejor para mas de veinte categorias;La grafica de barras no puede mostrar nombres de categorias
+  CorrectAnswer: La grafica de barras facilita comparar cantidades entre modulos, mientras que la de sectores facilita ver la proporcion de cada modulo
+  AnswerTests: omnitest(correctVal='La grafica de barras facilita comparar cantidades entre modulos, mientras que la de sectores facilita ver la proporcion de cada modulo')
+  Hint: Piensa en para que sirve mejor cada tipo de grafica segun las definiciones 3 y 4.
+
+- Class: text
+  Output: Ahora practicaremos con un segundo caso, relacionado con la gestion de un proyecto de software.
+
+- Class: cmd_question
+  Output: Un equipo registro las horas dedicadas a cada fase del proyecto, Analisis 8 horas, Diseno 5 horas, Desarrollo 20 horas y Pruebas 7 horas. Crea un vector llamado horas con esos cuatro valores en ese orden.
+  CorrectAnswer: horas <- c(8, 5, 20, 7)
+  AnswerTests: omnitest(correctExpr='horas <- c(8, 5, 20, 7)')
+  Hint: Usa horas <- c(8, 5, 20, 7).
+
+- Class: text
+  Output: Actividad integradora. Vamos a combinar varios aprendizajes de esta practica usando el vector horas que acabas de crear.
+
+- Class: cmd_question
+  Output: Paso 1 de la actividad integradora. Crea un vector llamado fases con los nombres "Analisis", "Diseno", "Desarrollo" y "Pruebas", en ese orden.
+  CorrectAnswer: fases <- c("Analisis", "Diseno", "Desarrollo", "Pruebas")
+  AnswerTests: omnitest(correctExpr='fases <- c("Analisis", "Diseno", "Desarrollo", "Pruebas")')
+  Hint: Usa fases <- c("Analisis", "Diseno", "Desarrollo", "Pruebas").
+
+- Class: cmd_question
+  Output: Paso 2. Asigna los nombres de fases como nombres del vector horas usando names().
+  CorrectAnswer: names(horas) <- fases
+  AnswerTests: omnitest(correctExpr='names(horas) <- fases')
+  Hint: names(horas) <- fases.
+
+- Class: cmd_question
+  Output: Paso 3. Genera la grafica de barras del vector horas.
+  CorrectAnswer: barplot(horas)
+  AnswerTests: omnitest(correctExpr='barplot(horas)')
+  Hint: barplot(horas).
+
+- Class: cmd_question
+  Output: Paso 4. Genera la grafica de sectores del vector horas.
+  CorrectAnswer: pie(horas)
+  AnswerTests: omnitest(correctExpr='pie(horas)')
+  Hint: pie(horas).
+
+- Class: mult_question
+  Output: Paso 5, interpretacion final. Segun las dos graficas que generaste, que fase del proyecto consumio mas tiempo y por lo tanto representa la porcion mas grande en la grafica de sectores?
+  AnswerChoices: Analisis;Diseno;Desarrollo;Pruebas
+  CorrectAnswer: Desarrollo
+  AnswerTests: omnitest(correctVal='Desarrollo')
+  Hint: Observa cual barra es la mas alta y cual porcion del pastel es la mas grande.
+
+- Class: text
+  Output: Resumen. En esta practica aprendiste que la grafica de barras compara frecuencias entre categorias mediante barras, y que la grafica de sectores muestra la proporcion de cada categoria respecto al total mediante un circulo dividido en porciones. Tambien practicaste las funciones barplot() y pie() en R, aplicadas a un caso de errores por modulo y a un caso de horas por fase de un proyecto de software.
+
+- Class: text
+  Output: Gracias por completar esta practica de Graficas de Barras y Graficas de Sectores. Recuerda que elegir el tipo de grafica correcto depende de lo que quieras comunicar, comparacion entre categorias o proporcion respecto al total.

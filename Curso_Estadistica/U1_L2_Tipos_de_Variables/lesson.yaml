@@ -1,0 +1,159 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: U1_L2_Tipos_de_Variables
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: Bienvenido a la practica interactiva de estadistica descriptiva. En esta leccion trabajaremos el tema Tipos de variables.
+ 
+- Class: text
+  Output: Antes de resumir o graficar cualquier conjunto de datos, es necesario reconocer que tipo de variable se esta analizando, ya que de eso depende que herramientas estadisticas se pueden usar.
+ 
+- Class: text
+  Output: Objetivo de aprendizaje. Al finalizar esta practica, identificaras y clasificaras correctamente los distintos tipos de variables utilizados en estadistica descriptiva, y aplicaras esta clasificacion en R.
+ 
+- Class: text
+  Output: Recordemos dos conceptos previos. Una poblacion es el conjunto completo de elementos que se desea estudiar, y una muestra es un subconjunto representativo de esa poblacion. Cada elemento de la poblacion o muestra se describe mediante variables.
+  # Triola, M. F. (2018). Estadistica (12a ed.). Pearson Educacion.
+
+- Class: text
+  Output: Una variable es una caracteristica o atributo que puede tomar distintos valores en los elementos que se estudian. Por ejemplo, el lenguaje de programacion favorito de un estudiante, o el numero de errores detectados en un programa, son variables.
+  # Hernandez Sampieri, R., Fernandez Collado, C., & Baptista Lucio, P. (1997). Metodologia de la investigacion. McGraw-Hill.
+
+- Class: text
+  Output: Ejemplo. En un proyecto de Ingenieria de Software se puede registrar el lenguaje de programacion utilizado en cada modulo del sistema. Esa caracteristica, lenguaje de programacion, es una variable porque cambia de un modulo a otro.
+ 
+- Class: text
+  Output: Las variables se clasifican en dos grandes grupos, cualitativas y cuantitativas, segun el tipo de valor que representan.
+  # Triola, M. F. (2018). Estadistica (12a ed.). Pearson Educacion.
+
+- Class: text
+  Output: Las variables cualitativas, tambien llamadas categoricas, expresan una cualidad o categoria y no se miden con numeros, aunque a veces se codifiquen como numeros.
+  
+- Class: text
+  Output: Ejemplo. El tipo de licencia de un software (libre, propietaria o freeware) es una variable cualitativa, porque describe una categoria y no una cantidad.
+ 
+- Class: text
+  Output: Las variables cuantitativas expresan una cantidad numerica y se pueden medir u ordenar matematicamente. Se dividen a su vez en discretas y continuas.
+  # Triola, M. F. (2018). Estadistica (12a ed.). Pearson Educacion.
+
+- Class: text
+  Output: Las variables cuantitativas discretas toman valores que se cuentan (normalmente enteros), como el numero de bugs reportados en un sprint. Las variables cuantitativas continuas pueden tomar cualquier valor dentro de un intervalo, como el tiempo de ejecucion de un programa en segundos.
+  # Moore, D. S., Notz, W. I., & Fligner, M. A. (2005). Estadistica aplicada basica (2a ed.). Barcelona: Antoni Bosch Editor.
+
+- Class: text
+  Output: Ejemplo. El numero de commits realizados por un desarrollador en una semana es una variable cuantitativa discreta, porque solo puede ser 0, 1, 2, 3 y asi sucesivamente, nunca 2.5 commits.
+ 
+- Class: mult_question
+  Output: Cual de las siguientes variables es cualitativa?
+  AnswerChoices: Numero de errores de compilacion;Tiempo de respuesta del servidor en milisegundos;Tipo de base de datos utilizada (SQL o NoSQL);Cantidad de lineas de codigo
+  CorrectAnswer: Tipo de base de datos utilizada (SQL o NoSQL)
+  AnswerTests: omnitest(correctVal='Tipo de base de datos utilizada (SQL o NoSQL)')
+  Hint: Piensa cual de las opciones describe una categoria y no una cantidad numerica.
+ 
+- Class: cmd_question
+  Output: Crea un vector llamado lenguajes con los valores "Python", "R" y "Java", que representan el lenguaje usado en tres proyectos.
+  CorrectAnswer: lenguajes <- c("Python", "R", "Java")
+  AnswerTests: omnitest(correctExpr='lenguajes <- c("Python", "R", "Java")')
+  Hint: Usa el operador de asignacion <- y la funcion c() para agrupar los tres textos.
+ 
+- Class: cmd_question
+  Output: Usa la funcion class() para verificar el tipo de dato que R asigno al vector lenguajes.
+  CorrectAnswer: class(lenguajes)
+  AnswerTests: omnitest(correctExpr='class(lenguajes)')
+  Hint: Escribe class( y dentro el nombre del vector.
+ 
+- Class: mult_question
+  Output: R clasifico el vector lenguajes como character. Estadisticamente, a que tipo de variable corresponde lenguajes?
+  AnswerChoices: Cuantitativa discreta;Cuantitativa continua;Cualitativa;Poblacion
+  CorrectAnswer: Cualitativa
+  AnswerTests: omnitest(correctVal='Cualitativa')
+  Hint: lenguajes almacena categorias de texto, no cantidades numericas.
+ 
+- Class: exact_question
+  Output: El vector lenguajes tiene tres categorias distintas (Python, R, Java). Si agregamos "Python" una segunda vez, cuantas categorias unicas seguiria teniendo la variable?
+  CorrectAnswer: 3
+  AnswerTests: omnitest(correctVal=3)
+  Hint: Cuenta solo los valores diferentes, sin repetir Python.
+ 
+- Class: cmd_question
+  Output: Crea un vector llamado bugs con los valores 3, 5, 2, 8 y 1, que representan el numero de errores reportados en cinco sprints.
+  CorrectAnswer: bugs <- c(3, 5, 2, 8, 1)
+  AnswerTests: omnitest(correctExpr='bugs <- c(3, 5, 2, 8, 1)')
+  Hint: Recuerda usar c() para combinar los cinco numeros enteros.
+ 
+- Class: mult_question
+  Output: La variable bugs solo puede tomar valores enteros (no existen 2.5 bugs). A que tipo de variable corresponde?
+  AnswerChoices: Cualitativa;Cuantitativa discreta;Cuantitativa continua;Nominal
+  CorrectAnswer: Cuantitativa discreta
+  AnswerTests: omnitest(correctVal='Cuantitativa discreta')
+  Hint: Piensa si entre dos valores enteros consecutivos existen valores intermedios posibles para esta variable.
+ 
+- Class: cmd_question
+  Output: Crea un vector llamado tiempos con los valores 2.5, 3.1 y 1.8, que representan el tiempo en segundos que tardo un programa en ejecutarse en tres pruebas.
+  CorrectAnswer: tiempos <- c(2.5, 3.1, 1.8)
+  AnswerTests: omnitest(correctExpr='tiempos <- c(2.5, 3.1, 1.8)')
+  Hint: Usa numeros con punto decimal dentro de c().
+ 
+- Class: mult_question
+  Output: La variable tiempos puede tomar valores como 2.5, 2.55, 2.553, etc. A que tipo de variable corresponde?
+  AnswerChoices: Cuantitativa discreta;Cuantitativa continua;Cualitativa;Muestra
+  CorrectAnswer: Cuantitativa continua
+  AnswerTests: omnitest(correctVal='Cuantitativa continua')
+  Hint: Una variable continua admite infinitos valores intermedios dentro de un rango, no solo enteros.
+ 
+- Class: text
+  Output: Interpretacion. Compara bugs y tiempos. Ambas son cuantitativas, pero bugs solo admite conteos enteros (discreta) mientras que tiempos admite fracciones de segundo (continua). Esta distincion importa porque cambia el tipo de graficos y calculos adecuados para cada una.
+ 
+- Class: exact_question
+  Output: Si una variable cuantitativa discreta representa el numero de commits por dia y solo puede tomar valores enteros, cuantos valores posibles existen estrictamente entre 4 y 5 (sin incluirlos)?
+  CorrectAnswer: 0
+  AnswerTests: omnitest(correctVal=0)
+  Hint: Entre dos enteros consecutivos no existen otros numeros enteros.
+ 
+- Class: mult_question
+  Output: Un formulario registra el "nivel de severidad de un bug" con las opciones baja, media y alta. Que tipo de variable es?
+  AnswerChoices: Cuantitativa continua;Cuantitativa discreta;Cualitativa;Poblacion
+  CorrectAnswer: Cualitativa
+  AnswerTests: omnitest(correctVal='Cualitativa')
+  Hint: baja, media y alta son categorias, aunque tengan un orden implicito, no son numeros medibles.
+ 
+- Class: text
+  Output: Interpretacion. El caso anterior (severidad de un bug) muestra que una variable cualitativa puede tener un orden logico entre sus categorias. Esto no la convierte en cuantitativa, sigue sin poder sumarse o promediarse numericamente de forma directa.
+
+- Class: text
+  Output: Actividad integradora. Vas a aplicar todo lo visto en la practica usando un caso de un equipo de desarrollo de software.
+ 
+- Class: cmd_question
+  Output: Crea un vector llamado modulos con los valores "Backend", "Frontend" y "Base de datos", que representan los modulos de un sistema.
+  CorrectAnswer: modulos <- c("Backend", "Frontend", "Base de datos")
+  AnswerTests: omnitest(correctExpr='modulos <- c("Backend", "Frontend", "Base de datos")')
+  Hint: Usa comillas para cada texto y separalos con coma dentro de c().
+ 
+- Class: mult_question
+  Output: El vector modulos que acabas de crear, a que tipo de variable corresponde?
+  AnswerChoices: Cuantitativa discreta;Cuantitativa continua;Cualitativa;Muestra
+  CorrectAnswer: Cualitativa
+  AnswerTests: omnitest(correctVal='Cualitativa')
+  Hint: modulos almacena nombres, categorias de texto.
+ 
+- Class: cmd_question
+  Output: Ahora crea un vector llamado horas_prueba con los valores 4.5, 6.25 y 3.75, que representan las horas dedicadas a pruebas en cada modulo.
+  CorrectAnswer: horas_prueba <- c(4.5, 6.25, 3.75)
+  AnswerTests: omnitest(correctExpr='horas_prueba <- c(4.5, 6.25, 3.75)')
+  Hint: Usa numeros decimales dentro de c(), en el mismo orden que los modulos.
+ 
+- Class: exact_question
+  Output: horas_prueba admite valores como 4.5 o 6.25, con decimales. A que tipo de variable cuantitativa corresponde. Escribe 1 si es discreta o 2 si es continua.
+  CorrectAnswer: 2
+  AnswerTests: omnitest(correctVal=2)
+  Hint: Piensa si admite fracciones de hora, no solo horas completas.
+ 
+- Class: text
+  Output: Resumen. En esta practica clasificaste variables en cualitativas y cuantitativas, y dentro de las cuantitativas distinguiste entre discretas (valores enteros y contables, como bugs o commits) y continuas (cualquier valor dentro de un rango, como tiempos o duraciones). Tambien viste que una variable cualitativa puede tener orden (como la severidad de un bug) sin dejar de ser cualitativa.
+ 
+- Class: text
+  Output: Gracias por completar esta practica de Tipos de variables. Recuerda que reconocer correctamente el tipo de variable es el primer paso antes de elegir tablas, graficos o medidas estadisticas adecuadas.

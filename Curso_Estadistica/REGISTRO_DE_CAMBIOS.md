@@ -27,7 +27,21 @@ Decision: conservar / modificar / sustituir / eliminar. Origen: P2 o P3.
 | L4 | Sustituir datos | tiempo_carga igual en los 3 dispositivos (estratificar no aportaba); asignacion no proporcional sin ponderar; paso 1 innecesario con `init_data()` | Tiempo depende del dispositivo; muestreo proporcional (2%); sin `init_data()`; Paso 2 justifica estratificar; histograma y error estandar; verificado: sd medias 0.060 vs 0.079 en MAS |
 - Eliminada la referencia "Martinez (2020)" en L1 y L2 (apuntes no verificables); se conserva en L3 por la formula de normalidad de p-gorro. Revisar con la docente.
 
+## Unidad 1 (origen P1) - modificar
+| Leccion | Problema | Correccion |
+|---|---|---|
+| Todas | Archivos con nombre de descarga (`lesson (3).yaml`, `initLesson (3).R`) que swirl no reconoce; initLesson y customTests solo con texto de plantilla; meta con Course/Author/Organization distintos; Lesson con espacios o distinta de la carpeta | Renombrados a `lesson.yaml`, `initLesson.R`, `customTests.R`; meta unificado; acentos quitados (ASCII) |
+| U1_L1 Poblacion, muestra, parametro y estadistico | Una opcion de "ejemplo de parametro" era "la media de 10 empleados al azar", pero la poblacion de la leccion tiene exactamente 10 empleados (seria un parametro) | Cambiada a "4 empleados" |
+| U1_L2 Tipos de variables | Referencias con enlaces a copias de libros en studylib, scribd y otros sitios | Se quitaron los enlaces y se dejaron las citas (completar en APA si se piden); "discretas = solo enteros" precisado |
+| U1_L4 Media, mediana y moda | Media de 7 tiempos dada como 31.28 (es 31.2857, se redondea a 31.29); "la mediana no se ve afectada por valores extremos" (sobrestima); regla media>mediana presentada como absoluta; el hint de la mediana daba la respuesta | Corregidos |
+| U1_L3 Graficas de barras y sectores | Hints que dan el codigo exacto | Pendiente de siguiente pasada (igual que P3) |
+
+## Integracion entre lecciones
+- U3_L1 repetia las definiciones de poblacion, muestra y parametro de U1_L1: se conserva como repaso y se agrega el puente "retomamos la Unidad 1 y agregamos ESTIMADOR".
+- Terminologia: **estadistico** = valor calculado de una muestra; **estimador** = estadistico usado para aproximar un parametro.
+- U1_L2 repite brevemente poblacion/muestra como repaso: se conserva.
+
 ## Pendiente (siguiente pasada)
 - Hints que regalan el codigo (P3) y pruebas `omnitest(correctExpr)` rigidas.
-- Lecciones de U1 y "Conociendo RStudio".
+- Leccion "Conociendo RStudio" (00) y actualizar MANIFEST.
 - P3: actividades integradoras muy cortas; faltan figuras.

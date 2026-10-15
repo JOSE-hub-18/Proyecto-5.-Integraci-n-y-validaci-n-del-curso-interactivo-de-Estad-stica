@@ -13,7 +13,7 @@
   Output: "Objetivo de aprendizaje: al terminar esta leccion podras distinguir entre poblacion, muestra, parametro y estimador; calcular estimaciones puntuales en R; y construir e interpretar intervalos de confianza para una media y una proporcion."
 
 - Class: text
-  Output: "Empecemos con los conceptos basicos. La POBLACION es el conjunto completo de elementos que queremos estudiar. La MUESTRA es un subconjunto de la poblacion que realmente observamos. El PARAMETRO es una caracteristica numerica de la poblacion, por ejemplo la media poblacional. El ESTIMADOR es una formula calculada a partir de la muestra que se usa para aproximar ese parametro."
+  Output: "Repasemos los conceptos de la Unidad 1 y agreguemos uno nuevo, el de ESTIMADOR. La POBLACION es el conjunto completo de elementos que queremos estudiar. La MUESTRA es un subconjunto de la poblacion que realmente observamos. El PARAMETRO es una caracteristica numerica de la poblacion, por ejemplo la media poblacional. El ESTIMADOR es una formula calculada a partir de la muestra que se usa para aproximar ese parametro."
 
 - Class: mult_question
   Output: "Un profesor quiere conocer el promedio de calificacion de TODOS los estudiantes de su universidad (mas de 10,000), pero solo revisa las calificaciones de 40 estudiantes elegidos al azar. Que representan esos 40 estudiantes?"

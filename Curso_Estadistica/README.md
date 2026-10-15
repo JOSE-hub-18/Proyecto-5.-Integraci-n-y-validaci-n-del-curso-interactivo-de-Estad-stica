@@ -9,16 +9,17 @@ Curso de Estadistica para Ingenieria de Software (UACJ). Integra los Proyectos 1
 | Parte | Estado |
 |---|---|
 | 00 Conociendo RStudio | Pendiente |
-| Unidad 1. Estadistica descriptiva | Pendiente (faltan lecciones de los integrantes) |
+| Unidad 1. Estadistica descriptiva (4 lecciones) | Corregida |
 | Unidad 2. Muestreo (4 lecciones) | Corregida |
 | Unidad 3. Estimacion (3 lecciones) | Corregida |
 
 ## Estructura
-swirl organiza un curso como una carpeta con lecciones en un solo nivel. La unidad se indica con el prefijo del nombre (U2_, U3_).
+swirl organiza un curso como una carpeta con lecciones en un solo nivel. La unidad se indica con el prefijo del nombre (U1_, U2_, U3_).
 
 ```
 Curso_Estadistica/
   MANIFEST                 orden de las lecciones
+  U1_L1_... a U1_L4_...    Unidad 1 Estadistica descriptiva
   U2_L1_... a U2_L4_...    Unidad 2 Muestreo
   U3_L1_... a U3_L3_...    Unidad 3 Estimacion
     lesson.yaml            explicaciones, preguntas y retroalimentacion

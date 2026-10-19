@@ -27,6 +27,12 @@ Decision: conservar / modificar / sustituir / eliminar. Origen: P2 o P3.
 | L4 | Sustituir datos | tiempo_carga igual en los 3 dispositivos (estratificar no aportaba); asignacion no proporcional sin ponderar; paso 1 innecesario con `init_data()` | Tiempo depende del dispositivo; muestreo proporcional (2%); sin `init_data()`; Paso 2 justifica estratificar; histograma y error estandar; verificado: sd medias 0.060 vs 0.079 en MAS |
 - Eliminada la referencia "Martinez (2020)" en L1 y L2 (apuntes no verificables); se conserva en L3 por la formula de normalidad de p-gorro. Revisar con la docente.
 
+## 00 Conociendo RStudio - crear (nueva)
+- 37 bloques: 8 de opcion multiple, 11 de codigo, 1 numerica, 1 pregunta con multiples hints (`test_notas()`), actividad final y resumen.
+- Las respuestas de codigo se validan por resultado (`crea_var()`), no por el texto exacto.
+- Se explica que la pista aparece automaticamente tras una respuesta incorrecta (swirl no tiene comando `hint()`) y los comandos skip/play/nxt/bye/main/info.
+- Retira de U1-U3 la necesidad de reexplicar `c()`, `mean()` y vectores (revisar repeticiones en la siguiente pasada).
+
 ## Unidad 1 (origen P1) - modificar
 | Leccion | Problema | Correccion |
 |---|---|---|
@@ -43,5 +49,4 @@ Decision: conservar / modificar / sustituir / eliminar. Origen: P2 o P3.
 
 ## Pendiente (siguiente pasada)
 - Hints que regalan el codigo (P3) y pruebas `omnitest(correctExpr)` rigidas.
-- Leccion "Conociendo RStudio" (00) y actualizar MANIFEST.
 - P3: actividades integradoras muy cortas; faltan figuras.

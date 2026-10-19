@@ -1,0 +1,183 @@
+- Class: meta
+  Course: Curso_Estadistica
+  Lesson: 00_Conociendo_RStudio
+  Author: Equipo Curso_Estadistica
+  Type: Standard
+  Organization: UACJ - Ingenieria de Software
+  Version: 2.4.5
+
+- Class: text
+  Output: "Bienvenido al curso de Estadistica. Esta primera leccion es breve (unos 15 minutos) y te ensena lo minimo de R y RStudio que necesitas para hacer todas las demas lecciones. No necesitas experiencia previa. Cuando un mensaje termine con '...', presiona Enter para continuar."
+
+- Class: text
+  Output: "Objetivo: al terminar sabras identificar las partes principales de RStudio, escribir instrucciones en la consola, crear objetos y vectores, usar funciones basicas, leer los resultados y manejar swirl (responder preguntas y usar las pistas)."
+
+- Class: text
+  Output: "R es un lenguaje de programacion y un programa para hacer calculos y analisis estadistico. RStudio es el programa donde usas R: te da ventanas ordenadas para escribir instrucciones, ver resultados, graficas y ayuda. Piensalo como un auto: R es el motor y RStudio es el tablero."
+
+- Class: mult_question
+  Output: "Cual afirmacion es correcta?"
+  AnswerChoices: R es el lenguaje y motor de calculo, y RStudio es el entorno donde lo usas;RStudio es el lenguaje y R es el entorno;R y RStudio son exactamente lo mismo;RStudio solo sirve para hacer graficas
+  CorrectAnswer: R es el lenguaje y motor de calculo, y RStudio es el entorno donde lo usas
+  AnswerTests: omnitest(correctVal='R es el lenguaje y motor de calculo, y RStudio es el entorno donde lo usas')
+  Hint: "Recuerda la comparacion del auto. Que parte hace los calculos y que parte es la que usas para manejarlo?"
+
+- Class: text
+  Output: "RStudio normalmente se divide en cuatro areas. Abajo a la izquierda esta la CONSOLA (Console), donde se escriben y ejecutan instrucciones; es donde trabajaras en este curso. Arriba a la izquierda esta el editor de scripts (Source), para guardar codigo en archivos (puede no aparecer si no hay un archivo abierto). Arriba a la derecha esta Environment, que lista los objetos que vas creando. Abajo a la derecha estan las pestanas Files, Plots, Packages y Help (archivos, graficas, paquetes y ayuda). Si tu pantalla se ve distinta, busca las areas por su nombre."
+
+- Class: mult_question
+  Output: "En este curso escribes tus respuestas en..."
+  AnswerChoices: La consola (Console);La pestana Environment;La pestana Plots;La pestana Help
+  CorrectAnswer: La consola (Console)
+  AnswerTests: omnitest(correctVal='La consola (Console)')
+  Hint: "Busca el area donde aparece el simbolo > y donde swirl te hace las preguntas."
+
+- Class: text
+  Output: "La consola muestra el simbolo > cuando espera una instruccion. Escribes la instruccion, presionas Enter, R la ejecuta y muestra el resultado. Puedes usarla como calculadora."
+
+- Class: cmd_question
+  Output: "Escribe la suma de 2 mas 3 y presiona Enter."
+  CorrectAnswer: 2 + 3
+  AnswerTests: omnitest(correctVal=5)
+  Hint: "Escribe la operacion igual que en una calculadora, con el signo +."
+
+- Class: text
+  Output: "Observa que el resultado empieza con [1]. Ese numero indica la posicion del primer valor mostrado en esa linea. Cuando R muestra muchos valores, cada linea empieza con la posicion de su primer valor. Aqui solo hay uno: el 5."
+
+- Class: mult_question
+  Output: "En la consola aparece [1] 5. Que significa el [1]?"
+  AnswerChoices: Que el 5 es el primer valor del resultado;Que el resultado de la suma es 1;Que ocurrio un error;Que hay un 1 oculto en la suma
+  CorrectAnswer: Que el 5 es el primer valor del resultado
+  AnswerTests: omnitest(correctVal='Que el 5 es el primer valor del resultado')
+  Hint: "El numero entre corchetes no es parte del resultado: indica una posicion."
+
+- Class: text
+  Output: "Un OBJETO guarda un valor con un nombre para usarlo despues. Se crea con el operador de asignacion <- (un signo menor que seguido de un guion). Por ejemplo, peso <- 70 guarda el 70 en el objeto peso. R distingue mayusculas de minusculas: peso y Peso son objetos distintos. Los nombres no llevan espacios ni empiezan con un numero; para separar palabras usa guion bajo, por ejemplo mi_edad."
+
+- Class: cmd_question
+  Output: "Crea un objeto llamado edad con el valor 20."
+  CorrectAnswer: edad <- 20
+  AnswerTests: crea_var('edad', 20)
+  Hint: "Escribe el nombre del objeto, luego el operador <- y despues el valor."
+
+- Class: text
+  Output: "Mira ahora la pestana Environment (arriba a la derecha): ya aparece edad con su valor. Ahi puedes ver todos los objetos que has creado."
+
+- Class: cmd_question
+  Output: "Para ver el valor de un objeto, escribe su nombre y presiona Enter. Muestra el valor de edad."
+  CorrectAnswer: edad
+  AnswerTests: omnitest(correctExpr='edad')
+  Hint: "Solo escribe el nombre del objeto, sin ningun otro simbolo."
+
+- Class: cmd_question
+  Output: "Los objetos se pueden usar en operaciones. Calcula edad + 1."
+  CorrectAnswer: edad + 1
+  AnswerTests: omnitest(correctVal=21)
+  Hint: "Escribe el nombre del objeto, el signo + y el numero 1."
+
+- Class: mult_question
+  Output: "Cual es un nombre valido para un objeto en R?"
+  AnswerChoices: calificaciones_finales;2calificaciones;mis calificaciones;calificaciones-finales
+  CorrectAnswer: calificaciones_finales
+  AnswerTests: omnitest(correctVal='calificaciones_finales')
+  Hint: "Los nombres no pueden empezar con un numero, llevar espacios ni guiones medios."
+
+- Class: text
+  Output: "Un VECTOR guarda varios valores juntos. Se crea con la funcion c() (de 'combinar'), separando los valores con comas. En estadistica, un vector suele representar los datos de una variable, por ejemplo las calificaciones de varios estudiantes."
+
+- Class: cmd_question
+  Output: "Crea un vector llamado calificaciones con los valores 6, 9, 7, 10 y 7 (en ese orden)."
+  CorrectAnswer: calificaciones <- c(6, 9, 7, 10, 7)
+  AnswerTests: crea_var('calificaciones', c(6, 9, 7, 10, 7))
+  Hint: "Usa calificaciones <- c( ... ) con los cinco valores separados por comas."
+
+- Class: cmd_question
+  Output: "Muestra el contenido del vector calificaciones."
+  CorrectAnswer: calificaciones
+  AnswerTests: omnitest(correctExpr='calificaciones')
+  Hint: "Escribe solo el nombre del vector y presiona Enter."
+
+- Class: text
+  Output: "Ahora el [1] marca la posicion del primer elemento del vector, y despues aparecen sus cinco valores."
+
+- Class: text
+  Output: "Una FUNCION es una instruccion que recibe datos y devuelve un resultado. Se escribe con el nombre de la funcion y, entre parentesis, el objeto sobre el que actua. Algunas funciones basicas para datos son: mean() (media o promedio), length() (cuantos datos hay), sum() (suma), min() y max() (valor menor y mayor)."
+
+- Class: cmd_question
+  Output: "Calcula la media del vector calificaciones."
+  CorrectAnswer: mean(calificaciones)
+  AnswerTests: omnitest(correctExpr='mean(calificaciones)')
+  Hint: "Escribe el nombre de la funcion y pon calificaciones entre parentesis."
+
+- Class: mult_question
+  Output: "R muestra [1] 7.8. Como interpretas ese resultado?"
+  AnswerChoices: El promedio de las 5 calificaciones es 7.8;Hay 7.8 calificaciones;La calificacion que mas se repite es 7.8;La calificacion mas alta es 7.8
+  CorrectAnswer: El promedio de las 5 calificaciones es 7.8
+  AnswerTests: omnitest(correctVal='El promedio de las 5 calificaciones es 7.8')
+  Hint: "mean() calcula el promedio: la suma de los valores entre cuantos son."
+
+- Class: cmd_question
+  Output: "Usa length() para saber cuantas calificaciones hay en el vector."
+  CorrectAnswer: length(calificaciones)
+  AnswerTests: omnitest(correctExpr='length(calificaciones)')
+  Hint: "length() cuenta cuantos elementos tiene un vector. Pon calificaciones entre parentesis."
+
+- Class: exact_question
+  Output: "Prueba la funcion max() con el vector calificaciones. Cual es la calificacion mas alta? Escribe el numero."
+  CorrectAnswer: 10
+  AnswerTests: omnitest(correctVal=10)
+  Hint: "Ejecuta max(calificaciones) y escribe el numero que aparece como respuesta."
+
+- Class: text
+  Output: "Como funciona swirl. Los mensajes que terminan en '...' esperan que presiones Enter. En las preguntas de opcion multiple escribes el numero de la opcion y presionas Enter. En las preguntas de codigo escribes la instruccion en la consola y presionas Enter. En las preguntas numericas escribes el numero. Algunos mensajes automaticos de swirl, como 'Great job!' o 'Not quite!', salen en ingles aunque la leccion este en espanol."
+
+- Class: text
+  Output: "Las PISTAS (Hint). Si tu respuesta es incorrecta, swirl te lo dice y muestra automaticamente una pista debajo del mensaje. Lee la pista e intenta de nuevo. Las pistas orientan, pero no dan la respuesta completa. En algunas preguntas la pista cambia segun el error que cometiste."
+
+- Class: cmd_question
+  Output: "Practica con pistas. Crea un vector llamado notas con los valores 5, 6 y 7. Si swirl dice que no es correcto, lee la pista y vuelve a intentar."
+  CorrectAnswer: notas <- c(5, 6, 7)
+  AnswerTests: test_notas()
+  Hint: "Revisa que uses notas <- c( ... ) con los tres valores separados por comas."
+
+- Class: mult_question
+  Output: "Que ocurre cuando respondes mal una pregunta en swirl?"
+  AnswerChoices: swirl muestra una pista y puedes intentarlo de nuevo;La leccion termina;Pierdes todo tu progreso;Debes reiniciar R
+  CorrectAnswer: swirl muestra una pista y puedes intentarlo de nuevo
+  AnswerTests: omnitest(correctVal='swirl muestra una pista y puedes intentarlo de nuevo')
+  Hint: "Revisa el mensaje sobre las pistas que acabas de leer."
+
+- Class: text
+  Output: "Comandos especiales de swirl (se escriben en la consola, con parentesis). skip() salta la pregunta actual. play() te deja probar cosas en R por tu cuenta, y swirl ignora lo que hagas hasta que escribas nxt(). bye() sale de swirl y guarda tu progreso. main() regresa al menu principal. info() muestra esta lista. Para volver despues, escribe library(swirl) y luego swirl()."
+
+- Class: mult_question
+  Output: "Que comando usas para salir de swirl guardando tu progreso?"
+  AnswerChoices: bye();skip();play();info()
+  CorrectAnswer: bye()
+  AnswerTests: omnitest(correctVal='bye()')
+  Hint: "Piensa en la palabra en ingles para despedirse."
+
+- Class: text
+  Output: "Actividad final. Un equipo de software registro el tiempo de respuesta (en segundos) de 4 pruebas de una aplicacion: 2.5, 3.1, 2.8 y 3.4. Vas a usar todo lo que aprendiste."
+
+- Class: cmd_question
+  Output: "Crea un vector llamado tiempos con esos 4 valores."
+  CorrectAnswer: tiempos <- c(2.5, 3.1, 2.8, 3.4)
+  AnswerTests: crea_var('tiempos', c(2.5, 3.1, 2.8, 3.4))
+  Hint: "Usa tiempos <- c( ... ) con los cuatro valores separados por comas."
+
+- Class: cmd_question
+  Output: "Calcula la media de tiempos y guardala en un objeto llamado promedio."
+  CorrectAnswer: promedio <- mean(tiempos)
+  AnswerTests: crea_var('promedio', 2.95)
+  Hint: "Escribe promedio <- y a continuacion la funcion que calcula la media de tiempos."
+
+- Class: mult_question
+  Output: "Que significa que promedio valga 2.95?"
+  AnswerChoices: En promedio, las 4 pruebas tardaron 2.95 segundos;Todas las pruebas tardaron exactamente 2.95 segundos;La prueba mas lenta tardo 2.95 segundos;Se hicieron 2.95 pruebas
+  CorrectAnswer: En promedio, las 4 pruebas tardaron 2.95 segundos
+  AnswerTests: omnitest(correctVal='En promedio, las 4 pruebas tardaron 2.95 segundos')
+  Hint: "El promedio resume los datos en un solo valor, pero no significa que todos los datos sean iguales a el."
+
+- Class: text
+  Output: "Resumen. R es el lenguaje y RStudio el entorno donde lo usas. La consola (simbolo >) es donde escribes y ejecutas instrucciones. Los objetos guardan valores con <-, y los vectores con c(). Funciones como mean(), length() y max() calculan resultados, y el [1] indica la posicion del primer valor mostrado. En swirl, una respuesta incorrecta muestra una pista automaticamente, y puedes usar skip(), play(), nxt(), bye(), main() e info(). Ya estas listo para comenzar la Unidad 1."

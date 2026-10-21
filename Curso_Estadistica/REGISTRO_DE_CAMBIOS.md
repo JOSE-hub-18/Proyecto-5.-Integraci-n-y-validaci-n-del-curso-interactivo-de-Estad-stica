@@ -47,6 +47,14 @@ Decision: conservar / modificar / sustituir / eliminar. Origen: P2 o P3.
 - Terminologia: **estadistico** = valor calculado de una muestra; **estimador** = estadistico usado para aproximar un parametro.
 - U1_L2 repite brevemente poblacion/muestra como repaso: se conserva.
 
+## Pasada de coherencia 1: hints y pruebas (U1_L1, U1_L3, U3_L1, U3_L2, U3_L3)
+| Problema | Correccion |
+|---|---|
+| 32 enunciados o hints mostraban la linea de codigo completa (U1_L3: 9, U3: 19, U1_L1: 1; P2 no tenia). En 00 se dejan 3 a proposito: ahi mostrar la sintaxis es parte de ensenar | Los enunciados dicen que calcular y que funcion conviene; los hints orientan (que funcion, que va dentro, en que orden) sin dar la linea completa. Las formulas (margen de error, tamano de muestra) quedan en el texto explicativo |
+| Pruebas `omnitest(correctExpr=...)` que aceptan una sola forma de escribir la respuesta | Se validan por **resultado**: `crea_obj()`, `crea_var()`, `llama_a()`, `tiene_nombres()` y `es_muestra()` en cada `customTests.R`. Aceptan variantes correctas (por ejemplo `barplot(errores, main = ...)` o `sum(x)/length(x)`) y rechazan las incorrectas con un mensaje especifico |
+| Intervalo de diferencia con el orden de grupos invertido solo decia "incorrecto" | `crea_obj()` detecta el signo contrario y avisa que se revise el orden de los grupos |
+- Verificado con las funciones reales de swirl: 22 variantes correctas e incorrectas probadas (todas se comportan como se espera) y `probar_curso.R` sin problemas en las 12 lecciones.
+
 ## Pendiente (siguiente pasada)
 - Hints que regalan el codigo (P3) y pruebas `omnitest(correctExpr)` rigidas.
 - P3: actividades integradoras muy cortas; faltan figuras.

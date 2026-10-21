@@ -46,22 +46,22 @@
   Hint: Utiliza el operador de asignacion <- y la funcion c() con los cuatro nombres entre comillas.
 
 - Class: cmd_question
-  Output: Ahora crea un vector llamado errores con la cantidad de bugs reportados en cada modulo, en el mismo orden, 12, 5, 8 y 3.
+  Output: "Ahora crea un vector llamado errores con la cantidad de bugs reportados en cada modulo, en el mismo orden que modulos: 12, 5, 8 y 3."
   CorrectAnswer: errores <- c(12, 5, 8, 3)
-  AnswerTests: omnitest(correctExpr='errores <- c(12, 5, 8, 3)')
-  Hint: Usa errores <- c(12, 5, 8, 3), respetando el orden de Login, Pagos, Reportes y Perfil.
+  AnswerTests: crea_var('errores', c(12, 5, 8, 3))
+  Hint: "Un vector se crea con la funcion c(). Respeta el orden de Login, Pagos, Reportes y Perfil."
 
 - Class: cmd_question
   Output: Para que la grafica muestre el nombre de cada modulo en lugar de solo numeros, asigna los nombres del vector modulos como nombres del vector errores usando la funcion names().
   CorrectAnswer: names(errores) <- modulos
-  AnswerTests: omnitest(correctExpr='names(errores) <- modulos')
+  AnswerTests: tiene_nombres('errores', 'modulos')
   Hint: La sintaxis es names(vector_a_nombrar) <- vector_con_los_nombres.
 
 - Class: cmd_question
   Output: Genera ahora la grafica de barras de errores usando la funcion barplot().
   CorrectAnswer: barplot(errores)
-  AnswerTests: omnitest(correctExpr='barplot(errores)')
-  Hint: Escribe barplot(errores).
+  AnswerTests: llama_a('barplot', 'errores')
+  Hint: "La funcion barplot() dibuja la grafica de barras de un vector. Dentro del parentesis va el vector que quieres graficar."
 
 - Class: text
   Output: Observa la grafica que acabas de generar.
@@ -123,8 +123,8 @@
 - Class: cmd_question
   Output: Genera ahora la grafica de sectores del vector errores usando la funcion pie().
   CorrectAnswer: pie(errores)
-  AnswerTests: omnitest(correctExpr='pie(errores)')
-  Hint: Escribe pie(errores).
+  AnswerTests: llama_a('pie', 'errores')
+  Hint: "La funcion pie() dibuja una grafica de sectores. Dentro del parentesis va el vector que quieres graficar."
 
 - Class: mult_question
   Output: Comparando la grafica de barras y la grafica de sectores que generaste con los mismos datos, cual afirmacion es correcta?
@@ -139,8 +139,8 @@
 - Class: cmd_question
   Output: Un equipo registro las horas dedicadas a cada fase del proyecto, Analisis 8 horas, Diseno 5 horas, Desarrollo 20 horas y Pruebas 7 horas. Crea un vector llamado horas con esos cuatro valores en ese orden.
   CorrectAnswer: horas <- c(8, 5, 20, 7)
-  AnswerTests: omnitest(correctExpr='horas <- c(8, 5, 20, 7)')
-  Hint: Usa horas <- c(8, 5, 20, 7).
+  AnswerTests: crea_var('horas', c(8, 5, 20, 7))
+  Hint: "Un vector se crea con c(), con los valores en el orden de las fases: Analisis, Diseno, Desarrollo y Pruebas."
 
 - Class: text
   Output: Actividad integradora. Vamos a combinar varios aprendizajes de esta practica usando el vector horas que acabas de crear.
@@ -148,26 +148,26 @@
 - Class: cmd_question
   Output: Paso 1 de la actividad integradora. Crea un vector llamado fases con los nombres "Analisis", "Diseno", "Desarrollo" y "Pruebas", en ese orden.
   CorrectAnswer: fases <- c("Analisis", "Diseno", "Desarrollo", "Pruebas")
-  AnswerTests: omnitest(correctExpr='fases <- c("Analisis", "Diseno", "Desarrollo", "Pruebas")')
-  Hint: Usa fases <- c("Analisis", "Diseno", "Desarrollo", "Pruebas").
+  AnswerTests: crea_var('fases', c('Analisis', 'Diseno', 'Desarrollo', 'Pruebas'))
+  Hint: "Es un vector de texto: cada nombre va entre comillas y separado por comas dentro de c()."
 
 - Class: cmd_question
   Output: Paso 2. Asigna los nombres de fases como nombres del vector horas usando names().
   CorrectAnswer: names(horas) <- fases
-  AnswerTests: omnitest(correctExpr='names(horas) <- fases')
-  Hint: names(horas) <- fases.
+  AnswerTests: tiene_nombres('horas', 'fases')
+  Hint: "Es el mismo procedimiento que usaste con errores y modulos, ahora con horas y fases."
 
 - Class: cmd_question
   Output: Paso 3. Genera la grafica de barras del vector horas.
   CorrectAnswer: barplot(horas)
-  AnswerTests: omnitest(correctExpr='barplot(horas)')
-  Hint: barplot(horas).
+  AnswerTests: llama_a('barplot', 'horas')
+  Hint: "Es lo mismo que hiciste con errores, ahora con el vector horas."
 
 - Class: cmd_question
   Output: Paso 4. Genera la grafica de sectores del vector horas.
   CorrectAnswer: pie(horas)
-  AnswerTests: omnitest(correctExpr='pie(horas)')
-  Hint: pie(horas).
+  AnswerTests: llama_a('pie', 'horas')
+  Hint: "Es lo mismo que hiciste con errores, ahora con el vector horas."
 
 - Class: mult_question
   Output: Paso 5, interpretacion final. Segun las dos graficas que generaste, que fase del proyecto consumio mas tiempo y por lo tanto representa la porcion mas grande en la grafica de sectores?

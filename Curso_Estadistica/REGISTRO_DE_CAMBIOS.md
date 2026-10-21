@@ -55,6 +55,21 @@ Decision: conservar / modificar / sustituir / eliminar. Origen: P2 o P3.
 | Intervalo de diferencia con el orden de grupos invertido solo decia "incorrecto" | `crea_obj()` detecta el signo contrario y avisa que se revise el orden de los grupos |
 - Verificado con las funciones reales de swirl: 22 variantes correctas e incorrectas probadas (todas se comportan como se espera) y `probar_curso.R` sin problemas en las 12 lecciones.
 
-## Pendiente (siguiente pasada)
-- Hints que regalan el codigo (P3) y pruebas `omnitest(correctExpr)` rigidas.
-- P3: actividades integradoras muy cortas; faltan figuras.
+## Pasada de coherencia 2: interpretacion, integradoras, repeticiones y estilo
+| Leccion | Problema | Correccion |
+|---|---|---|
+| U1_L3 Graficas | Casi todo era memoria o leer una barra; el cierre era trivial | 2 calculos nuevos de porcentaje (`porcentajes`, `porcentajes_horas`) y 3 preguntas de interpretacion: conclusion respaldada por los datos, cuando conviene barras y no sectores, y cierre del caso de horas por fase |
+| U3_L1 Estimacion | Integradora solo comparaba "mas ancho o mas angosto" | Calcula los anchos (`anchos`) y pide interpretar el efecto del tamano de muestra sobre la precision |
+| U3_L2 Dos poblaciones | Integradora solo calculaba el margen de error de las medias | Margen de error de la diferencia de proporciones (`margen_error_prop`) e interpretacion de un intervalo muy ancho por muestras pequenas |
+| U3_L3 Confianza y tamano | Faltaba el tamano de muestra para una **proporcion** (contenido que pide la guia del P3) | Texto con la formula, calculo de `n_prop` (385) y pregunta de por que se usa p = 0.5 |
+| U1_L1 | Reexplicaba `c()` y `mean()`, ya cubiertos en 00 | Remite a la leccion Conociendo RStudio |
+| U1_L4 | Ultimo mensaje era una nota de desarrollo ("prueba la practica con un companero") | Reemplazado por un cierre para el estudiante; "RESUMEN FINAL" pasa a "Resumen" |
+| U2_L2, U2_L4 | Sin bloque de Objetivo; U2_L4 cerraba con "Conclusion" | Objetivo agregado; cierre como "Resumen" (igual que el resto) |
+| U1 (3 lecciones) | Llamaban "practica" a la leccion | Unificado a "leccion" en todo el curso (19 cambios) |
+- Verificado: `probar_curso.R` sin problemas en las 12 lecciones y 8 respuestas nuevas probadas (correctas e incorrectas) con las funciones reales de swirl.
+
+## Pendiente
+- Matriz de integracion en el formato de la guia y arquitectura (diagrama o arbol).
+- Figuras o graficas de apoyo en las lecciones de la Unidad 3 (opcional).
+- Verificar referencias en APA (ediciones de los libros citados y Martinez, 2020).
+- Revisar la dificultad progresiva entre unidades con los resultados del piloto.

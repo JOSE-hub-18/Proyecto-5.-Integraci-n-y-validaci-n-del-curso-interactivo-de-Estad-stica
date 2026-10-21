@@ -26,22 +26,22 @@
   Output: "Vamos a comprobarlo con datos reales. Ya tienes cargada muestra_30, una muestra de 30 estudiantes con sus horas de estudio semanal."
 
 - Class: cmd_question
-  Output: "Construye un intervalo de confianza del 90% para la media usando t.test(muestra_30, conf.level = 0.90)$conf.int y guardalo en ic_90."
+  Output: "Construye un intervalo de confianza del 90% para la media con t.test() aplicada a muestra_30, y guarda solo el intervalo en ic_90."
   CorrectAnswer: ic_90 <- t.test(muestra_30, conf.level = 0.90)$conf.int
-  AnswerTests: omnitest(correctExpr='ic_90 <- t.test(muestra_30, conf.level = 0.90)$conf.int')
-  Hint: "t.test() acepta el argumento conf.level para especificar el nivel de confianza deseado."
+  AnswerTests: crea_obj('ic_90', 't.test(muestra_30, conf.level = 0.90)$conf.int')
+  Hint: "t.test() acepta el argumento conf.level para indicar el nivel de confianza. Recuerda extraer el intervalo con $conf.int."
 
 - Class: cmd_question
-  Output: "Ahora construye el intervalo de confianza del 95% con t.test(muestra_30, conf.level = 0.95)$conf.int y guardalo en ic_95."
+  Output: "Ahora construye el intervalo del 95% con la misma muestra y guardalo en ic_95."
   CorrectAnswer: ic_95 <- t.test(muestra_30, conf.level = 0.95)$conf.int
-  AnswerTests: omnitest(correctExpr='ic_95 <- t.test(muestra_30, conf.level = 0.95)$conf.int')
-  Hint: "Es el mismo procedimiento que el paso anterior, cambiando conf.level a 0.95."
+  AnswerTests: crea_obj('ic_95', 't.test(muestra_30, conf.level = 0.95)$conf.int')
+  Hint: "Es el mismo procedimiento, cambiando el valor de conf.level."
 
 - Class: cmd_question
-  Output: "Finalmente, construye el intervalo de confianza del 99% con t.test(muestra_30, conf.level = 0.99)$conf.int y guardalo en ic_99."
+  Output: "Finalmente, construye el intervalo del 99% con la misma muestra y guardalo en ic_99."
   CorrectAnswer: ic_99 <- t.test(muestra_30, conf.level = 0.99)$conf.int
-  AnswerTests: omnitest(correctExpr='ic_99 <- t.test(muestra_30, conf.level = 0.99)$conf.int')
-  Hint: "Mismo procedimiento, cambiando conf.level a 0.99."
+  AnswerTests: crea_obj('ic_99', 't.test(muestra_30, conf.level = 0.99)$conf.int')
+  Hint: "Mismo procedimiento, cambiando conf.level al nivel que corresponde."
 
 - Class: exact_question
   Output: "Calcula el ancho del intervalo del 99% con diff(ic_99). Redondeado a un decimal, cuanto mide ese ancho?"
@@ -60,9 +60,9 @@
   Output: "Ahora veamos el efecto del TAMANO DE MUESTRA sobre la precision. Ya tienes cargada muestra_100, una muestra mas grande de 100 estudiantes de la misma poblacion."
 
 - Class: cmd_question
-  Output: "Construye un intervalo de confianza del 95% para la media usando muestra_100: t.test(muestra_100, conf.level = 0.95)$conf.int, y guardalo en ic_95_100."
+  Output: "Construye un intervalo de confianza del 95% para la media usando ahora muestra_100 (en lugar de muestra_30) y guardalo en ic_95_100."
   CorrectAnswer: ic_95_100 <- t.test(muestra_100, conf.level = 0.95)$conf.int
-  AnswerTests: omnitest(correctExpr='ic_95_100 <- t.test(muestra_100, conf.level = 0.95)$conf.int')
+  AnswerTests: crea_obj('ic_95_100', 't.test(muestra_100, conf.level = 0.95)$conf.int')
   Hint: "Mismo procedimiento que con muestra_30, pero usando el vector muestra_100."
 
 - Class: exact_question
@@ -82,16 +82,16 @@
   Output: "Por ultimo, veamos como DETERMINAR EL TAMANO DE MUESTRA necesario para lograr un margen de error especifico. La formula aproximada para la media es: n = (z * desviacion_estandar / margen_de_error_deseado) al cuadrado, donde z depende del nivel de confianza (z = 1.96 para 95%). Como la desviacion estandar de la poblacion no se conoce, se usa la de una muestra preliminar; por eso el resultado es una aproximacion."
 
 - Class: cmd_question
-  Output: "Ya tienes cargada la variable desviacion_estimada (la desviacion estandar de muestra_30). Calcula z_95 <- qnorm(0.975), el valor z correspondiente a 95% de confianza."
+  Output: "Ya tienes cargada la variable desviacion_estimada (la desviacion estandar de muestra_30). Calcula el valor z correspondiente a 95% de confianza y guardalo en z_95."
   CorrectAnswer: z_95 <- qnorm(0.975)
-  AnswerTests: omnitest(correctExpr='z_95 <- qnorm(0.975)')
-  Hint: "Para un intervalo de dos colas al 95%, se usa el cuantil 0.975 de la distribucion normal estandar con la funcion qnorm()."
+  AnswerTests: crea_obj('z_95', 'qnorm(0.975)')
+  Hint: "Con 95% de confianza queda 2.5% en cada cola, asi que necesitas el cuantil que deja 97.5% por debajo. La funcion qnorm() devuelve cuantiles de la distribucion normal estandar."
 
 - Class: cmd_question
-  Output: "Supon que quieres un margen de error de 0.5 horas con 95% de confianza. Calcula el tamano de muestra necesario con: n_necesaria <- ceiling((z_95 * desviacion_estimada / 0.5)^2)."
+  Output: "Supon que quieres un margen de error de 0.5 horas con 95% de confianza. Con la formula de tamano de muestra de esta leccion, calcula el tamano necesario (redondeado hacia arriba) y guardalo en n_necesaria."
   CorrectAnswer: n_necesaria <- ceiling((z_95 * desviacion_estimada / 0.5)^2)
-  AnswerTests: omnitest(correctExpr='n_necesaria <- ceiling((z_95 * desviacion_estimada / 0.5)^2)')
-  Hint: "ceiling() redondea hacia arriba, porque el tamano de muestra siempre debe ser un numero entero suficiente para lograr la precision deseada."
+  AnswerTests: crea_obj('n_necesaria', 'ceiling((z_95 * desviacion_estimada / 0.5)^2)')
+  Hint: "La formula es n = (z * sigma / E)^2, donde sigma es desviacion_estimada y E es el margen de error deseado. ceiling() redondea hacia arriba."
 
 - Class: exact_question
   Output: "Cuantos estudiantes en total (n_necesaria) se necesitarian para lograr ese margen de error de 0.5 horas con 95% de confianza?"
@@ -110,10 +110,10 @@
   Output: "Actividad integradora: vas a calcular el margen de error real que tendrias si usaras exactamente esos n_necesaria estudiantes con 95% de confianza, para comprobar que efectivamente se acerca a 0.5."
 
 - Class: cmd_question
-  Output: "Calcula margen_error_estimado <- z_95 * desviacion_estimada / sqrt(n_necesaria), y confirma que el resultado es cercano a 0.5."
+  Output: "Comprueba el resultado: calcula el margen de error que obtendrias con n_necesaria datos y guardalo en margen_error_estimado. Debe quedar cercano a 0.5."
   CorrectAnswer: margen_error_estimado <- z_95 * desviacion_estimada / sqrt(n_necesaria)
-  AnswerTests: omnitest(correctExpr='margen_error_estimado <- z_95 * desviacion_estimada / sqrt(n_necesaria)')
-  Hint: "Es la formula inversa a la que usaste para calcular n_necesaria: despeja el margen de error en vez del tamano de muestra."
+  AnswerTests: crea_obj('margen_error_estimado', 'z_95 * desviacion_estimada / sqrt(n_necesaria)')
+  Hint: "Es la formula inversa a la que usaste para n_necesaria: ahora conoces n y quieres el margen de error. Usa sqrt() para la raiz cuadrada."
 
 - Class: mult_question
   Output: "A lo largo de esta leccion viste tres formas de mover la precision de una estimacion: cambiar el nivel de confianza, cambiar el tamano de muestra, y fijar de antemano un margen de error deseado. Cual de las siguientes afirmaciones resume mejor la relacion entre estos tres elementos?"

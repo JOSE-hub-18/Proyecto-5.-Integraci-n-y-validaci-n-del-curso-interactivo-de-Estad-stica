@@ -26,16 +26,16 @@
   Output: "En el entorno ya tienes cargados dos objetos: poblacion_calificaciones (las 500 calificaciones de toda la poblacion) y muestra_calificaciones (una muestra aleatoria de 40 estudiantes tomada de esa poblacion)."
 
 - Class: cmd_question
-  Output: "Calcula la media de la poblacion completa con mean(poblacion_calificaciones) y guardala en la variable media_poblacional."
+  Output: "Calcula la media de la poblacion completa (poblacion_calificaciones) y guardala en la variable media_poblacional. Este valor es el PARAMETRO."
   CorrectAnswer: media_poblacional <- mean(poblacion_calificaciones)
-  AnswerTests: omnitest(correctExpr='media_poblacional <- mean(poblacion_calificaciones)')
-  Hint: "Usa la funcion mean() sobre el vector poblacion_calificaciones y asigna el resultado con <-."
+  AnswerTests: crea_obj('media_poblacional', 'mean(poblacion_calificaciones)')
+  Hint: "La funcion mean() calcula la media. Dentro del parentesis va el vector de la poblacion, y el resultado se guarda con <-."
 
 - Class: cmd_question
-  Output: "Ahora calcula la media de la muestra con mean(muestra_calificaciones) y guardala en la variable media_muestral. Este numero es tu ESTIMACION PUNTUAL de la media poblacional."
+  Output: "Ahora calcula la media de la muestra (muestra_calificaciones) y guardala en la variable media_muestral. Este numero es tu ESTIMACION PUNTUAL de la media poblacional."
   CorrectAnswer: media_muestral <- mean(muestra_calificaciones)
-  AnswerTests: omnitest(correctExpr='media_muestral <- mean(muestra_calificaciones)')
-  Hint: "Es el mismo procedimiento que el paso anterior, mean() sobre muestra_calificaciones."
+  AnswerTests: crea_obj('media_muestral', 'mean(muestra_calificaciones)')
+  Hint: "Es el mismo procedimiento que el paso anterior, pero con el vector de la muestra."
 
 - Class: mult_question
   Output: "Notaste que media_muestral no es exactamente igual a media_poblacional, aunque son parecidas. Como se interpreta correctamente esta diferencia?"
@@ -58,9 +58,9 @@
   Output: "La estimacion puntual da un solo numero, pero no dice que tan precisa es. Para eso se usan los INTERVALOS DE CONFIANZA: un rango de valores donde es razonable esperar que se encuentre el parametro poblacional, junto con un nivel de confianza asociado, por ejemplo 95%."
 
 - Class: cmd_question
-  Output: "Construye un intervalo de confianza del 95% para la media poblacional usando t.test(muestra_calificaciones)$conf.int y guardalo en la variable ic_media."
+  Output: "Construye un intervalo de confianza del 95% para la media poblacional con la funcion t.test() aplicada a la muestra, y guarda solo el intervalo en la variable ic_media."
   CorrectAnswer: ic_media <- t.test(muestra_calificaciones)$conf.int
-  AnswerTests: omnitest(correctExpr='ic_media <- t.test(muestra_calificaciones)$conf.int')
+  AnswerTests: crea_obj('ic_media', 't.test(muestra_calificaciones)$conf.int')
   Hint: "t.test() devuelve una lista de resultados; el intervalo de confianza esta guardado en el elemento $conf.int."
 
 - Class: exact_question
@@ -80,10 +80,10 @@
   Output: "Ahora trabajaremos con una PROPORCION. En muestra_aprobo tienes un vector logico (TRUE/FALSE) que indica si cada estudiante de la muestra aprobo el examen (calificacion mayor o igual a 70)."
 
 - Class: cmd_question
-  Output: "Construye un intervalo de confianza del 95% para la proporcion de aprobados usando prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int y guardalo en la variable ic_proporcion."
+  Output: "Construye un intervalo de confianza del 95% para la proporcion de aprobados con la funcion prop.test() y guarda solo el intervalo en la variable ic_proporcion. Necesitas el numero de aprobados y el tamano de la muestra."
   CorrectAnswer: ic_proporcion <- prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int
-  AnswerTests: omnitest(correctExpr='ic_proporcion <- prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int')
-  Hint: "sum(muestra_aprobo) cuenta cuantos TRUE hay (aprobados); length(muestra_aprobo) es el tamano de la muestra."
+  AnswerTests: crea_obj('ic_proporcion', 'prop.test(sum(muestra_aprobo), length(muestra_aprobo))$conf.int')
+  Hint: "El primer dato que recibe prop.test() es el numero de exitos (aprobados) y el segundo es el tamano de la muestra. sum() sobre un vector logico cuenta los TRUE y length() cuenta cuantos datos hay. Recuerda extraer el intervalo con $conf.int."
 
 - Class: exact_question
   Output: "Que proporcion (entre 0 y 1) de la MUESTRA aprobo el examen? Calcula mean(muestra_aprobo) y redondea a dos decimales."

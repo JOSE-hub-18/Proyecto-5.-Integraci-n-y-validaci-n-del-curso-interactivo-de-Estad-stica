@@ -10,6 +10,9 @@
   Output: "Bienvenido a la leccion 2. Veremos el muestreo por conglomerados y el muestreo por conveniencia, y despues compararas todos los metodos para decidir cual usar en cada situacion."
 
 - Class: text
+  Output: "Objetivo: al terminar esta leccion distinguiras el muestreo por conglomerados del estratificado, reconoceras los riesgos del muestreo por conveniencia y elegiras el metodo de muestreo adecuado en distintas situaciones."
+
+- Class: text
   Output: "Muestreo por conglomerados: la poblacion ya esta dividida en grupos naturales (conglomerados), por ejemplo aulas, calles o sucursales. Se eligen al azar algunos conglomerados y se estudian TODOS los elementos de los conglomerados elegidos (Walpole et al., 2016)."
 
 - Class: text

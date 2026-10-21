@@ -10,6 +10,9 @@
   Output: "Bienvenido a la leccion final de Muestreo. Aqui aplicaras todo lo aprendido en un problema de Ingenieria de Software: elegir un metodo de muestreo, obtener muestras en R y analizar la distribucion muestral."
 
 - Class: text
+  Output: "Objetivo: al terminar esta leccion elegiras y justificaras un metodo de muestreo para un problema de software, obtendras muestras con R y interpretaras la distribucion muestral de una media."
+
+- Class: text
   Output: "Contexto: una empresa quiere estimar el tiempo promedio de carga de su aplicacion movil. La poblacion son sus 5,000 usuarios registrados. Ya tienes cargado el data frame usuarios_app con tres columnas: id, dispositivo (Movil, Laptop o Tablet) y tiempo_carga (en segundos)."
 
 - Class: cmd_question
@@ -95,7 +98,7 @@
   Hint: Piensa en lo que viste en el Paso 2 sobre los promedios de cada dispositivo. El muestreo no elimina el error, solo lo controla.
 
 - Class: text
-  Output: "Conclusion: elegiste un metodo de muestreo justificado con los datos, obtuviste una muestra con R, calculaste un estadistico, repetiste el proceso y analizaste su distribucion muestral. Con esto cierras la Unidad 2. En la Unidad 3 usaras estas ideas para construir intervalos de confianza."
+  Output: "Resumen: elegiste un metodo de muestreo justificado con los datos, obtuviste una muestra con R, calculaste un estadistico, repetiste el proceso y analizaste su distribucion muestral. Con esto cierras la Unidad 2. En la Unidad 3 usaras estas ideas para construir intervalos de confianza."
 
 # REFERENCIAS (APA):
 # Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.

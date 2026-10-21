@@ -8,13 +8,13 @@
 
 - Class: text
   Output: >-
-    Bienvenido a la practica de estadistica descriptiva sobre Poblacion,
+    Bienvenido a la leccion de estadistica descriptiva sobre Poblacion,
     muestra, parametro y estadistico. En esta leccion repasaremos estos
     cuatro conceptos fundamentales y los aplicaremos usando R.
 
 - Class: text
   Output: >-
-    Al finalizar esta practica podras distinguir entre poblacion y muestra,
+    Al finalizar esta leccion podras distinguir entre poblacion y muestra,
     y entre parametro y estadistico, ademas de calcularlos usando funciones
     basicas de R.
 
@@ -26,9 +26,7 @@
 
 - Class: text
   Output: >-
-    Antes de comenzar, recuerda que en R un vector se crea con la funcion
-    c(), y que funciones como mean(), sd() y length() nos permiten resumir
-    conjuntos de datos numericos.
+    En esta leccion usaras los vectores y las funciones basicas que viste en Conociendo RStudio, como c(), mean() y length(), para trabajar con una poblacion y con una muestra.
 
 - Class: text
   Output: >-
@@ -287,6 +285,6 @@
 
 - Class: text
   Output: >-
-    Felicidades, has completado la practica de Poblacion, muestra,
+    Felicidades, has completado la leccion de Poblacion, muestra,
     parametro y estadistico. Estos conceptos son la base de toda la
     estadistica inferencial que veras mas adelante en el curso.

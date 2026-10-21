@@ -7,13 +7,13 @@
   Version: 2.4.5
 
 - Class: text
-  Output: Bienvenido a la practica interactiva de estadistica descriptiva. En esta leccion trabajaremos el tema Tipos de variables.
+  Output: Bienvenido a la leccion interactiva de estadistica descriptiva. En esta leccion trabajaremos el tema Tipos de variables.
  
 - Class: text
   Output: Antes de resumir o graficar cualquier conjunto de datos, es necesario reconocer que tipo de variable se esta analizando, ya que de eso depende que herramientas estadisticas se pueden usar.
  
 - Class: text
-  Output: Objetivo de aprendizaje. Al finalizar esta practica, identificaras y clasificaras correctamente los distintos tipos de variables utilizados en estadistica descriptiva, y aplicaras esta clasificacion en R.
+  Output: Objetivo de aprendizaje. Al finalizar esta leccion, identificaras y clasificaras correctamente los distintos tipos de variables utilizados en estadistica descriptiva, y aplicaras esta clasificacion en R.
  
 - Class: text
   Output: Recordemos dos conceptos previos. Una poblacion es el conjunto completo de elementos que se desea estudiar, y una muestra es un subconjunto representativo de esa poblacion. Cada elemento de la poblacion o muestra se describe mediante variables.
@@ -125,7 +125,7 @@
   Output: Interpretacion. El caso anterior (severidad de un bug) muestra que una variable cualitativa puede tener un orden logico entre sus categorias. Esto no la convierte en cuantitativa, sigue sin poder sumarse o promediarse numericamente de forma directa.
 
 - Class: text
-  Output: Actividad integradora. Vas a aplicar todo lo visto en la practica usando un caso de un equipo de desarrollo de software.
+  Output: Actividad integradora. Vas a aplicar todo lo visto en la leccion usando un caso de un equipo de desarrollo de software.
  
 - Class: cmd_question
   Output: Crea un vector llamado modulos con los valores "Backend", "Frontend" y "Base de datos", que representan los modulos de un sistema.
@@ -153,7 +153,7 @@
   Hint: Piensa si admite fracciones de hora, no solo horas completas.
  
 - Class: text
-  Output: Resumen. En esta practica clasificaste variables en cualitativas y cuantitativas, y dentro de las cuantitativas distinguiste entre discretas (valores enteros y contables, como bugs o commits) y continuas (cualquier valor dentro de un rango, como tiempos o duraciones). Tambien viste que una variable cualitativa puede tener orden (como la severidad de un bug) sin dejar de ser cualitativa.
+  Output: Resumen. En esta leccion clasificaste variables en cualitativas y cuantitativas, y dentro de las cuantitativas distinguiste entre discretas (valores enteros y contables, como bugs o commits) y continuas (cualquier valor dentro de un rango, como tiempos o duraciones). Tambien viste que una variable cualitativa puede tener orden (como la severidad de un bug) sin dejar de ser cualitativa.
  
 - Class: text
-  Output: Gracias por completar esta practica de Tipos de variables. Recuerda que reconocer correctamente el tipo de variable es el primer paso antes de elegir tablas, graficos o medidas estadisticas adecuadas.
+  Output: Gracias por completar esta leccion de Tipos de variables. Recuerda que reconocer correctamente el tipo de variable es el primer paso antes de elegir tablas, graficos o medidas estadisticas adecuadas.

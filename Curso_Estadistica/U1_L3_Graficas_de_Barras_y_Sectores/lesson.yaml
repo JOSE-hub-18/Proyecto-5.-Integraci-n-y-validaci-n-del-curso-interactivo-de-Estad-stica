@@ -7,13 +7,13 @@
   Version: 2.4.5
 
 - Class: text
-  Output: Bienvenido a la practica interactiva de Graficas de Barras y Graficas de Sectores.
+  Output: Bienvenido a la leccion interactiva de Graficas de Barras y Graficas de Sectores.
 
 - Class: text
   Output: En esta leccion revisaremos como representar datos cualitativos mediante graficas de barras y graficas de sectores (tambien llamadas graficas de pastel), y como construirlas en R.
 
 - Class: text
-  Output: Al finalizar esta practica podras identificar cuando usar una grafica de barras o una grafica de sectores, y podras construir e interpretar ambas usando R.
+  Output: Al finalizar esta leccion podras identificar cuando usar una grafica de barras o una grafica de sectores, y podras construir e interpretar ambas usando R.
 
 - Class: text
   Output: Definicion 1. Una grafica de barras representa la frecuencia de cada categoria mediante barras separadas, cuya altura es proporcional a la frecuencia.
@@ -78,7 +78,7 @@
   AnswerChoices: Representa la frecuencia de cada categoria mediante barras separadas;Representa proporciones del total en forma de circulo;Solo puede usarse con variables numericas continuas;Muestra la relacion entre dos variables cuantitativas
   CorrectAnswer: Representa la frecuencia de cada categoria mediante barras separadas
   AnswerTests: omnitest(correctVal='Representa la frecuencia de cada categoria mediante barras separadas')
-  Hint: Piensa en la definicion 1 que revisamos al inicio de la practica.
+  Hint: Piensa en la definicion 1 que revisamos al inicio de la leccion.
 
 - Class: mult_question
   Output: Cual de las siguientes afirmaciones describe mejor una grafica de sectores?
@@ -106,7 +106,7 @@
   AnswerChoices: Variables cualitativas;Variables cuantitativas continuas sin agrupar;Variables aleatorias continuas;Solo variables numericas negativas
   CorrectAnswer: Variables cualitativas
   AnswerTests: omnitest(correctVal='Variables cualitativas')
-  Hint: Recuerda la definicion 3 de esta practica.
+  Hint: Recuerda la definicion 3 de esta leccion.
 
 - Class: exact_question
   Output: Si el modulo de Pagos tiene 5 errores de un total de 28 errores en todo el sistema, que porcentaje del total representa el modulo de Pagos? (Redondea a numero entero)
@@ -133,6 +133,26 @@
   AnswerTests: omnitest(correctVal='La grafica de barras facilita comparar cantidades entre modulos, mientras que la de sectores facilita ver la proporcion de cada modulo')
   Hint: Piensa en para que sirve mejor cada tipo de grafica segun las definiciones 3 y 4.
 
+- Class: cmd_question
+  Output: "Calcula el porcentaje que representa cada modulo del total de errores, redondeado a 1 decimal, y guardalo en porcentajes."
+  CorrectAnswer: porcentajes <- round(100 * errores / sum(errores), 1)
+  AnswerTests: crea_obj('porcentajes', 'round(100 * errores / sum(errores), 1)')
+  Hint: "Divide cada frecuencia entre el total (sum) y multiplica por 100. La funcion round(x, 1) redondea a un decimal."
+
+- Class: mult_question
+  Output: "Segun los porcentajes que calculaste, cual conclusion es correcta?"
+  AnswerChoices: Login y Reportes juntos concentran mas del 70% de los errores, por lo que conviene revisarlos primero;Pagos concentra la mayor parte de los errores;Perfil tiene el mismo porcentaje de errores que Login;Los cuatro modulos tienen casi la misma proporcion de errores
+  CorrectAnswer: Login y Reportes juntos concentran mas del 70% de los errores, por lo que conviene revisarlos primero
+  AnswerTests: omnitest(correctVal='Login y Reportes juntos concentran mas del 70% de los errores, por lo que conviene revisarlos primero')
+  Hint: "Suma los porcentajes de los dos modulos con mas errores y comparalos con el 70%."
+
+- Class: mult_question
+  Output: "Un equipo quiere comparar el numero de errores de 12 modulos distintos, algunos con valores muy parecidos. Que grafica conviene y por que?"
+  AnswerChoices: Una grafica de barras, porque permite comparar con claridad la altura de muchas categorias;Una grafica de sectores, porque muestra mejor las diferencias pequenas;Una grafica de sectores, porque siempre es mas atractiva;Ninguna, las graficas no sirven para variables cualitativas
+  CorrectAnswer: Una grafica de barras, porque permite comparar con claridad la altura de muchas categorias
+  AnswerTests: omnitest(correctVal='Una grafica de barras, porque permite comparar con claridad la altura de muchas categorias')
+  Hint: "Piensa que es mas facil de comparar con precision: alturas de barras o los angulos de un circulo con 12 sectores."
+
 - Class: text
   Output: Ahora practicaremos con un segundo caso, relacionado con la gestion de un proyecto de software.
 
@@ -143,7 +163,7 @@
   Hint: "Un vector se crea con c(), con los valores en el orden de las fases: Analisis, Diseno, Desarrollo y Pruebas."
 
 - Class: text
-  Output: Actividad integradora. Vamos a combinar varios aprendizajes de esta practica usando el vector horas que acabas de crear.
+  Output: Actividad integradora. Vamos a combinar varios aprendizajes de esta leccion usando el vector horas que acabas de crear.
 
 - Class: cmd_question
   Output: Paso 1 de la actividad integradora. Crea un vector llamado fases con los nombres "Analisis", "Diseno", "Desarrollo" y "Pruebas", en ese orden.
@@ -170,14 +190,27 @@
   Hint: "Es lo mismo que hiciste con errores, ahora con el vector horas."
 
 - Class: mult_question
-  Output: Paso 5, interpretacion final. Segun las dos graficas que generaste, que fase del proyecto consumio mas tiempo y por lo tanto representa la porcion mas grande en la grafica de sectores?
+  Output: Paso 5, interpretacion. Segun las dos graficas que generaste, que fase del proyecto consumio mas tiempo y por lo tanto representa la porcion mas grande en la grafica de sectores?
   AnswerChoices: Analisis;Diseno;Desarrollo;Pruebas
   CorrectAnswer: Desarrollo
   AnswerTests: omnitest(correctVal='Desarrollo')
   Hint: Observa cual barra es la mas alta y cual porcion del pastel es la mas grande.
 
-- Class: text
-  Output: Resumen. En esta practica aprendiste que la grafica de barras compara frecuencias entre categorias mediante barras, y que la grafica de sectores muestra la proporcion de cada categoria respecto al total mediante un circulo dividido en porciones. Tambien practicaste las funciones barplot() y pie() en R, aplicadas a un caso de errores por modulo y a un caso de horas por fase de un proyecto de software.
+- Class: cmd_question
+  Output: "Paso 6. Calcula el porcentaje de tiempo que representa cada fase, redondeado a 1 decimal, y guardalo en porcentajes_horas."
+  CorrectAnswer: porcentajes_horas <- round(100 * horas / sum(horas), 1)
+  AnswerTests: crea_obj('porcentajes_horas', 'round(100 * horas / sum(horas), 1)')
+  Hint: "Es el mismo calculo que hiciste con los errores, ahora con el vector horas."
+
+- Class: mult_question
+  Output: "Paso 7, interpretacion final. Que afirmacion esta respaldada por los datos?"
+  AnswerChoices: Desarrollo consumio la mitad del tiempo total del proyecto;Pruebas consumio mas tiempo que Analisis y Diseno juntos;Analisis y Diseno juntos consumieron mas de la mitad del tiempo;Todas las fases consumieron un porcentaje similar del tiempo
+  CorrectAnswer: Desarrollo consumio la mitad del tiempo total del proyecto
+  AnswerTests: omnitest(correctVal='Desarrollo consumio la mitad del tiempo total del proyecto')
+  Hint: "Compara cada afirmacion con porcentajes_horas y suma los porcentajes cuando haga falta."
 
 - Class: text
-  Output: Gracias por completar esta practica de Graficas de Barras y Graficas de Sectores. Recuerda que elegir el tipo de grafica correcto depende de lo que quieras comunicar, comparacion entre categorias o proporcion respecto al total.
+  Output: Resumen. En esta leccion aprendiste que la grafica de barras compara frecuencias entre categorias mediante barras, y que la grafica de sectores muestra la proporcion de cada categoria respecto al total mediante un circulo dividido en porciones. Tambien practicaste las funciones barplot() y pie() en R, aplicadas a un caso de errores por modulo y a un caso de horas por fase de un proyecto de software.
+
+- Class: text
+  Output: Gracias por completar esta leccion de Graficas de Barras y Graficas de Sectores. Recuerda que elegir el tipo de grafica correcto depende de lo que quieras comunicar, comparacion entre categorias o proporcion respecto al total.

@@ -123,4 +123,20 @@
   Hint: "Revisa la formula del tamano de muestra: n crece cuando z aumenta (mas confianza) y tambien cuando el margen de error deseado disminuye."
 
 - Class: text
-  Output: "Resumen de la Leccion 3: comparaste intervalos de confianza al 90%, 95% y 99% con la misma muestra; observaste como una muestra mas grande produce intervalos mas angostos sin sacrificar confianza; y calculaste el tamano de muestra necesario para lograr un margen de error especifico. Con esto completas las tres lecciones de estimacion estadistica del Proyecto 3."
+  Output: "Tamano de muestra para una PROPORCION. La formula aproximada es n = z al cuadrado por p por (1 - p), entre el margen de error deseado al cuadrado. Si no tienes ninguna estimacion previa de la proporcion p, se usa p = 0.5, que es el caso mas conservador."
+
+- Class: cmd_question
+  Output: "Quieres estimar la proporcion de usuarios satisfechos de una aplicacion con un margen de error de 0.05 (5 puntos porcentuales) y 95% de confianza. Calcula el tamano de muestra necesario (redondeado hacia arriba) con p = 0.5 y guardalo en n_prop."
+  CorrectAnswer: n_prop <- ceiling(z_95^2 * 0.5 * 0.5 / 0.05^2)
+  AnswerTests: crea_obj('n_prop', 'ceiling(z_95^2 * 0.5 * 0.5 / 0.05^2)')
+  Hint: "Usa la formula con z_95, p = 0.5 y el margen de error 0.05. Recuerda elevar al cuadrado y redondear hacia arriba con ceiling()."
+
+- Class: mult_question
+  Output: "Por que se usa p = 0.5 cuando no se conoce la proporcion real?"
+  AnswerChoices: Porque p por (1 - p) es maximo en 0.5, asi que la muestra resulta suficiente sea cual sea la proporcion real;Porque la mitad de los usuarios siempre esta satisfecha;Porque con p = 0.5 se necesita la muestra mas pequena posible;Porque el nivel de confianza siempre se calcula con 0.5
+  CorrectAnswer: Porque p por (1 - p) es maximo en 0.5, asi que la muestra resulta suficiente sea cual sea la proporcion real
+  AnswerTests: omnitest(correctVal='Porque p por (1 - p) es maximo en 0.5, asi que la muestra resulta suficiente sea cual sea la proporcion real')
+  Hint: "Calcula p por (1 - p) con p = 0.2 y con p = 0.5 y compara cual da el valor mas grande."
+
+- Class: text
+  Output: "Resumen de la Leccion 3: comparaste intervalos de confianza al 90%, 95% y 99% con la misma muestra; observaste como una muestra mas grande produce intervalos mas angostos sin sacrificar confianza; y calculaste el tamano de muestra necesario para lograr un margen de error especifico, tanto para una media como para una proporcion. Con esto completas las tres lecciones de estimacion estadistica del Proyecto 3."

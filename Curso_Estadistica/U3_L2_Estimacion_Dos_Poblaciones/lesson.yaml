@@ -122,5 +122,18 @@
   AnswerTests: omnitest(correctVal='Un rango de valores plausibles para un parametro poblacional (una diferencia o una razon), con un nivel de confianza dado')
   Hint: "Los tres intervalos estiman parametros de la poblacion. No describen a estudiantes individuales ni toman decisiones; cuantifican la incertidumbre de una estimacion."
 
+- Class: cmd_question
+  Output: "Calcula tambien el margen de error del intervalo de diferencia de proporciones y guardalo en margen_error_prop."
+  CorrectAnswer: margen_error_prop <- (ic_dif_prop[2] - ic_dif_prop[1]) / 2
+  AnswerTests: crea_obj('margen_error_prop', '(ic_dif_prop[2] - ic_dif_prop[1]) / 2')
+  Hint: "Es la mitad del ancho del intervalo, igual que con la diferencia de medias, pero ahora con ic_dif_prop."
+
+- Class: mult_question
+  Output: "El intervalo para la diferencia de proporciones de aprobados (B menos A) es aproximadamente [0.022, 0.425], muy ancho. Que lo explica y que se podria hacer?"
+  AnswerChoices: Las muestras son pequenas (35 y 32 estudiantes), y con mas datos el intervalo seria mas angosto;El Grupo B aprobo menos que el Grupo A, por eso el intervalo es ancho;El nivel de confianza es demasiado alto y hay que usar 100% para ser mas exactos;El intervalo esta mal calculado y debe repetirse con las mismas muestras
+  CorrectAnswer: Las muestras son pequenas (35 y 32 estudiantes), y con mas datos el intervalo seria mas angosto
+  AnswerTests: omnitest(correctVal='Las muestras son pequenas (35 y 32 estudiantes), y con mas datos el intervalo seria mas angosto')
+  Hint: "Recuerda de la Leccion 1 que el ancho depende del tamano de muestra. Aqui cada grupo tiene pocos estudiantes."
+
 - Class: text
   Output: "Resumen de la Leccion 2: estimaste la diferencia de medias y de proporciones entre dos grupos independientes, construiste un intervalo de confianza para la razon de varianzas, calculaste el margen de error correspondiente, e interpretaste cada intervalo como un rango de valores plausibles para un parametro poblacional. En la siguiente leccion trabajaras con el NIVEL DE CONFIANZA, la PRECISION y el TAMANO DE MUESTRA."

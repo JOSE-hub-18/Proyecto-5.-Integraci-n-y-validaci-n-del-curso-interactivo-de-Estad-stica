@@ -123,5 +123,18 @@
   AnswerTests: omnitest(correctVal='El intervalo se hace mas ancho (menos preciso)')
   Hint: "A menor tamano de muestra, hay menos informacion disponible, por lo que la incertidumbre (y el ancho del intervalo) aumenta."
 
+- Class: cmd_question
+  Output: "Calcula el ancho de cada intervalo (limite superior menos limite inferior) y guardalos juntos en un vector llamado anchos: primero el de ic_media (n = 40) y despues el de ic_media_chica (n = 15)."
+  CorrectAnswer: anchos <- c(ic_media[2] - ic_media[1], ic_media_chica[2] - ic_media_chica[1])
+  AnswerTests: crea_obj('anchos', 'c(ic_media[2] - ic_media[1], ic_media_chica[2] - ic_media_chica[1])')
+  Hint: "El ancho de un intervalo es su limite superior menos su limite inferior. Junta los dos anchos con c(), en el orden pedido."
+
+- Class: mult_question
+  Output: "Al reducir la muestra de 40 a 15 datos, el ancho del intervalo paso de 5.1 a 8.2 puntos. Que conclusion es correcta?"
+  AnswerChoices: Con menos datos la estimacion es menos precisa, aunque el nivel de confianza sigue siendo 95%;Con menos datos el nivel de confianza baja de 95% a menos;El intervalo de 15 datos esta mal calculado porque es mas ancho;Los dos intervalos son igual de precisos porque ambos tienen 95% de confianza
+  CorrectAnswer: Con menos datos la estimacion es menos precisa, aunque el nivel de confianza sigue siendo 95%
+  AnswerTests: omnitest(correctVal='Con menos datos la estimacion es menos precisa, aunque el nivel de confianza sigue siendo 95%')
+  Hint: "El nivel de confianza lo eliges tu. Lo que cambia con el tamano de muestra es la precision (el ancho del intervalo)."
+
 - Class: text
   Output: "Resumen de la Leccion 1: distinguiste poblacion, muestra, parametro y estimador; calculaste estimaciones puntuales con mean(); construiste intervalos de confianza para una media (t.test) y una proporcion (prop.test); calculaste el margen de error; e interpretaste el significado de un intervalo de confianza y el efecto del tamano de muestra sobre su precision. En la siguiente leccion trabajaras con la comparacion entre DOS poblaciones."

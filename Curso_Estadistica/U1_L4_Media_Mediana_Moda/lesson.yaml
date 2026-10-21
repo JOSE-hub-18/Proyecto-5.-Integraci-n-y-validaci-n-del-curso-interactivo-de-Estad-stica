@@ -6,10 +6,10 @@
   Organization: UACJ - Ingenieria de Software
   Version: 2.4.5
 - Class: text
-  Output: "Bienvenido a la practica interactiva de Estadistica Descriptiva. Hoy repasaremos las principales medidas de tendencia central: Media, Mediana y Moda."
+  Output: "Bienvenido a la leccion interactiva de Estadistica Descriptiva. Hoy repasaremos las principales medidas de tendencia central: Media, Mediana y Moda."
 
 - Class: text
-  Output: "Objetivo de aprendizaje: Al finalizar esta practica, identificaras las diferencias entre media, mediana y moda, calcularas cada una de ellas manualmente y mediante R, e interpretaras su significado en contextos reales de Ingenieria de Software."
+  Output: "Objetivo de aprendizaje: Al finalizar esta leccion, identificaras las diferencias entre media, mediana y moda, calcularas cada una de ellas manualmente y mediante R, e interpretaras su significado en contextos reales de Ingenieria de Software."
 
 - Class: text
   Output: "Concepto 1: Media aritmetica. Se calcula sumando todos los valores de un conjunto de datos y dividiendo el resultado entre el numero total de observaciones. Es el 'promedio' comun. Ejemplo en IS: El promedio de errores encontrados por modulo en una aplicacion."
@@ -117,7 +117,7 @@
   Hint: Si la media y la mediana son practicamente iguales, los datos tienden a ser simetricos.
 
 - Class: text
-  Output: "RESUMEN FINAL: Has aprendido que la Media es el promedio aritmetico y es sensible a valores extremos; la Mediana es el valor central y es robusta; y la Moda es el valor mas frecuente. En Ingenieria de Software, estas medidas nos ayudan a resumir tiempos de respuesta, cantidad de bugs, sprints, horas de trabajo, etc., para tomar mejores decisiones. Excelente trabajo!"
+  Output: "Resumen: Has aprendido que la Media es el promedio aritmetico y es sensible a valores extremos; la Mediana es el valor central y es robusta; y la Moda es el valor mas frecuente. En Ingenieria de Software, estas medidas nos ayudan a resumir tiempos de respuesta, cantidad de bugs, sprints, horas de trabajo, etc., para tomar mejores decisiones. Excelente trabajo!"
 
 - Class: text
-  Output: "Fin de la practica. Has completado exitosamente el repaso de Media, Mediana y Moda. No olvides probar nuevamente la practica con un companero para verificar su funcionamiento."
+  Output: "Fin de la leccion. Has completado el repaso de Media, Mediana y Moda. Ya puedes continuar con la siguiente leccion."

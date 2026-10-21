@@ -253,9 +253,8 @@
     Selecciona una muestra aleatoria de 4 servidores y guardala en
     muestra_tiempos usando sample().
   CorrectAnswer: muestra_tiempos <- sample(tiempos_respuesta, 4)
-  AnswerTests: omnitest(correctExpr='muestra_tiempos <- sample(tiempos_respuesta, 4)')
-  Hint: >-
-    Usa sample(tiempos_respuesta, 4) para elegir 4 valores al azar.
+  AnswerTests: es_muestra('muestra_tiempos', 'tiempos_respuesta', 4)
+  Hint: "sample(x, n) toma n elementos de x al azar. Piensa cual vector es tu poblacion y de cuantos servidores es la muestra."
 
 - Class: cmd_question
   Output: >-

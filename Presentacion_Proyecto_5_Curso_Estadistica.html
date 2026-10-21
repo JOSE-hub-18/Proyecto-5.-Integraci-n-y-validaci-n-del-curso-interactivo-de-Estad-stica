@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto 5 | Curso interactivo de Estadística</title>
+<style>
+:root{
+  --bg:#f4f6f8; --paper:#ffffff; --ink:#243447; --muted:#5e6b78;
+  --blue:#456b8a; --blue-soft:#e8eff5; --green:#64816f; --green-soft:#edf3ee;
+  --sand:#f3efe5; --line:#dce2e7; --accent:#8a9cac;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.deck{height:100vh;display:flex;flex-direction:column}
+.slide{
+  display:none; flex:1; width:min(1120px,94vw); margin:22px auto 12px; padding:clamp(24px,4vw,52px);
+  background:var(--paper); border:1px solid var(--line); border-radius:18px;
+  box-shadow:0 8px 28px rgba(30,48,64,.06); overflow:auto; min-height:0;
+}
+.slide.active{display:block}
+h1{font-size:clamp(2rem,4vw,3.1rem);line-height:1.12;margin:0 0 16px;color:#294d6a}
+h2{font-size:clamp(1.5rem,3vw,2.15rem);margin:0 0 22px;color:#294d6a}
+h3{font-size:1.05rem;margin:0 0 9px;color:#355d7c}
+p{font-size:clamp(.98rem,1.45vw,1.12rem);line-height:1.55;color:var(--muted);margin:8px 0}
+.kicker{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:12px}
+.subtitle{font-size:1.2rem;max-width:780px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{padding:18px 19px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.card.blue{background:var(--blue-soft);border-color:#d6e1ea}
+.card.green{background:var(--green-soft);border-color:#d9e5dc}
+.card.sand{background:var(--sand);border-color:#e8e0ce}
+.num{font-size:1.8rem;font-weight:700;color:var(--blue);margin-bottom:7px}
+ul{padding-left:20px;margin:8px 0;color:var(--muted);line-height:1.5}
+li{margin:5px 0}
+.pill{display:inline-block;padding:5px 9px;background:var(--blue-soft);color:#355d7c;border-radius:999px;font-size:.82rem;font-weight:700;margin:3px 4px 3px 0}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.91rem}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
+th{background:#edf2f6;color:#35546d;font-weight:700}
+td{color:var(--muted)}
+.arch{display:grid;gap:12px;max-width:900px;margin:0 auto}
+.arch-main{margin:auto;width:min(500px,100%);text-align:center;background:var(--blue-soft);border:1px solid #cddce7;border-radius:12px;padding:14px;font-weight:700}
+.arch-arrow{text-align:center;color:#82909b;font-size:1.35rem;line-height:1}
+.arch-units{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.arch-unit{padding:14px 10px;text-align:center;border-radius:12px;background:var(--sand);border:1px solid #e8e0ce}
+.arch-unit strong{display:block;color:#655b43;margin-bottom:6px}
+.arch-unit span{font-size:.88rem;color:var(--muted)}
+.arch-files{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.arch-files div{border:1px solid #d9e5dc;background:var(--green-soft);border-radius:12px;padding:14px;text-align:center}
+.arch-files strong{display:block;font-size:.95rem;margin-bottom:5px;color:#42644c}
+.arch-files span{font-size:.85rem;color:var(--muted)}
+.flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.flow div{flex:1;min-width:130px;text-align:center;padding:14px 10px;background:#f1f4f6;border:1px solid var(--line);border-radius:10px;color:#4b5b69;font-weight:600}
+.flow b{align-self:center;color:#82909b}
+.note{border-left:4px solid var(--green);background:var(--green-soft);padding:13px 16px;border-radius:0 10px 10px 0;color:#435e4b;line-height:1.5;margin-top:16px}
+.footer{width:min(1120px,94vw);margin:0 auto 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#6d7a86;font-size:.86rem}
+.controls{display:flex;align-items:center;gap:8px}
+button{border:1px solid #cbd5dd;background:#fff;color:#35546d;padding:9px 14px;border-radius:9px;cursor:pointer;font-weight:700}
+button:hover{background:var(--blue-soft)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.progress{height:5px;background:#e2e7eb;border-radius:999px;overflow:hidden;flex:1;max-width:230px}
+.progress span{display:block;height:100%;width:14.285%;background:var(--green);transition:width .2s}
+.small{font-size:.88rem!important}
+@media(max-width:720px){
+ .slide{margin:10px auto;padding:22px;border-radius:12px}
+ .grid,.grid.two{grid-template-columns:1fr}
+ .arch-units,.arch-files{grid-template-columns:1fr}
+ .footer{padding:0 8px}
+ .progress{max-width:80px}
+}
+@media print{
+ body{background:#fff}.deck{height:auto}.slide{display:block!important;box-shadow:none;border:1px solid #ddd;width:100%;min-height:95vh;page-break-after:always;margin:0;border-radius:0}
+ .footer{display:none}
+}
+</style>
+</head>
+<body>
+<div class="deck" aria-label="Presentación">
+  <section class="slide active">
+    <div class="kicker">Proyecto 5 · Integración y validación</div>
+    <h1>Curso interactivo de Estadística</h1>
+    <p class="subtitle">Ingeniería de Software · R, RStudio y <strong>swirl</strong></p>
+    <div style="height:22px"></div>
+    <div class="card blue" style="max-width:760px">
+      <h3>Propósito del proyecto</h3>
+      <p>Integrar y mejorar los materiales de los Proyectos 1, 2 y 3 en un solo curso interactivo, con una secuencia clara de lecciones, ejercicios y retroalimentación.</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">01 · El curso</div>
+    <h2>¿Qué incluye?</h2>
+    <p>El curso reúne <strong>12 lecciones</strong>: una introducción a RStudio y tres unidades de Estadística.</p>
+    <div class="grid">
+      <div class="card green">
+        <div class="num">00</div><h3>Conociendo RStudio</h3>
+        <p>Interfaz, consola, objetos, vectores y funciones básicas. Prepara al estudiante para trabajar con R.</p>
+      </div>
+      <div class="card blue">
+        <div class="num">U1</div><h3>Estadística descriptiva</h3>
+        <p>Población, muestra y parámetro; tipos de variables; gráficas de barras y sectores; media, mediana y moda.</p>
+        <span class="pill">4 lecciones</span>
+      </div>
+      <div class="card sand">
+        <div class="num">U2</div><h3>Muestreo</h3>
+        <p>Métodos probabilísticos y no probabilísticos, distribuciones muestrales y aplicación integral.</p>
+        <span class="pill">4 lecciones</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;display:flex;gap:16px;align-items:center">
+      <div class="num" style="margin:0">U3</div><div><h3>Estimación</h3><p>Estimación puntual e intervalos, estimación para dos poblaciones, confianza, precisión y tamaño de muestra. <span class="pill">3 lecciones</span></p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">02 · Integración</div>
+    <h2>¿Cómo se integraron los proyectos?</h2>
+    <p>Se conservaron los temas centrales y se realizaron ajustes para mejorar la precisión estadística, la claridad de las instrucciones y la validación de respuestas.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origen / contenido</th><th>Decisión principal</th><th>Ejemplo de mejora documentada</th></tr></thead>
+        <tbody>
+          <tr><td>Proyecto 1 · Estadística descriptiva</td><td>Modificar</td><td>Corregir ejemplos y cálculos; mejorar preguntas de interpretación y pistas.</td></tr>
+          <tr><td>Proyecto 2 · Muestreo</td><td>Modificar y ajustar datos</td><td>Ampliar ejercicios, corregir validaciones y aclarar distribuciones muestrales.</td></tr>
+          <tr><td>Proyecto 3 · Estimación</td><td>Modificar</td><td>Validar respuestas por rango, aclarar intervalos y explicar precisión y tamaño de muestra.</td></tr>
+          <tr><td>Lección introductoria</td><td>Agregar</td><td>Crear “Conociendo RStudio” para facilitar el inicio a estudiantes principiantes.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">La matriz de integración registra por lección el origen, la decisión, la mejora realizada y el estado de validación.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">03 · Mejoras transversales</div>
+    <h2>Consistencia y experiencia de aprendizaje</h2>
+    <div class="grid two">
+      <div class="card">
+        <h3>Contenido estadístico</h3>
+        <ul>
+          <li>Corrección de ejemplos, cálculos y conceptos.</li>
+          <li>Preguntas centradas en interpretar resultados, no solo escribir código.</li>
+          <li>Terminología y objetivos más consistentes.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Interacción y validación</h3>
+        <ul>
+          <li>Pistas que orientan sin revelar directamente la respuesta.</li>
+          <li>Pruebas que aceptan variantes válidas de respuestas.</li>
+          <li>Archivos de datos y validaciones organizados por lección.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card sand" style="margin-top:16px">
+      <h3>Organización común</h3>
+      <p>Cada lección sigue una estructura reconocible: explicación, pregunta o práctica, validación y retroalimentación para el estudiante.</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">04 · Arquitectura</div>
+    <h2>¿Cómo está organizado el sistema?</h2>
+    <div class="arch">
+      <div class="arch-main">Curso_Estadistica/<br><span style="font-weight:400;font-size:.9rem">Repositorio del curso</span></div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-units">
+        <div class="arch-unit"><strong>00 · Introducción</strong><span>Conociendo RStudio</span></div>
+        <div class="arch-unit"><strong>U1 · Descriptiva</strong><span>4 lecciones</span></div>
+        <div class="arch-unit"><strong>U2 · Muestreo + U3 · Estimación</strong><span>4 + 3 lecciones</span></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-files">
+        <div><strong>lesson.yaml</strong><span>Contenido, preguntas, pistas y retroalimentación</span></div>
+        <div><strong>initLesson.R</strong><span>Datos y objetos que usa la lección</span></div>
+        <div><strong>customTests.R</strong><span>Validaciones y funciones de apoyo</span></div>
+      </div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:16px">El archivo <strong>MANIFEST</strong> establece el orden de las lecciones; <strong>README.md</strong> documenta instalación y ejecución.</p>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">05 · Funcionamiento</div>
+    <h2>Flujo de uso del curso</h2>
+    <div class="flow">
+      <div>Instalar R, RStudio y <em>swirl</em></div><b>→</b>
+      <div>Instalar el curso</div><b>→</b>
+      <div>Ejecutar <code>swirl()</code></div><b>→</b>
+      <div>Elegir lección y resolver actividades</div>
+    </div>
+    <div class="arch-arrow" style="margin:14px 0">↓</div>
+    <div class="grid two">
+      <div class="card blue">
+        <h3>Durante la lección</h3>
+        <p><code>lesson.yaml</code> presenta el contenido y las actividades; <code>initLesson.R</code> prepara los objetos necesarios.</p>
+      </div>
+      <div class="card green">
+        <h3>Al responder</h3>
+        <p><code>customTests.R</code> apoya la validación. El estudiante recibe retroalimentación y continúa con la secuencia prevista.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">06 · Cierre</div>
+    <h2>Un curso integrado y funcional</h2>
+    <div class="grid two">
+      <div class="card green">
+        <h3>Contenido unificado</h3>
+        <p>Se integraron los temas de estadística descriptiva, muestreo y estimación en una secuencia organizada, comenzando con la lección <strong>Conociendo RStudio</strong>.</p>
+      </div>
+      <div class="card blue">
+        <h3>Actividades mejoradas</h3>
+        <p>Se revisaron ejercicios, preguntas, pistas y validaciones para ofrecer instrucciones más claras y retroalimentación durante el aprendizaje.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>Organización y reproducibilidad</h3>
+      <p>La estructura del curso, el archivo <code>MANIFEST</code>, la documentación <code>README.md</code> y los archivos de cada lección facilitan su mantenimiento y ejecución.</p>
+    </div>
+    <div class="note"><strong>Conclusión:</strong> el resultado es un curso interactivo de Estadística que reúne los contenidos y actividades en una experiencia coherente, con una arquitectura organizada y herramientas de validación integradas.</div>
+  </section>
+</div>
+
+<footer class="footer">
+  <span id="counter">Diapositiva 1 de 7</span>
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Diapositiva anterior">← Anterior</button>
+    <button id="next" type="button" aria-label="Siguiente diapositiva">Siguiente →</button>
+  </div>
+</footer>
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const prev=document.getElementById('prev'), next=document.getElementById('next');
+  const counter=document.getElementById('counter'), bar=document.getElementById('bar');
+  let current=0;
+  function show(i){
+    current=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach((s,n)=>s.classList.toggle('active',n===current));
+    prev.disabled=current===0; next.disabled=current===slides.length-1;
+    counter.textContent=`Diapositiva ${current+1} de ${slides.length}`;
+    bar.style.width=`${((current+1)/slides.length)*100}%`;
+  }
+  prev.addEventListener('click',()=>show(current-1));
+  next.addEventListener('click',()=>show(current+1));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(current+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(current-1);}
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>
